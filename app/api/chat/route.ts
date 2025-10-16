@@ -9,43 +9,49 @@ const giga = new GigaChat({
 export async function POST(req: NextRequest) {
   try {
     const { text } = await req.json();
-
     if (!text) {
       return NextResponse.json({ error: "Не передан текст" }, { status: 400 });
     }
 
-    const prompt = `
-Ты — опытный корректор и редактор текстов.
-Ты должен внимательно прочитать предложенный текст, найти и исправить все орфографические, пунктуационные и грамматические ошибки.
-Ответь исправленным текстом без пояснений.
+    const systemMessage = {
+      role: "system",
+      content:
+        "Ты — опытный корректор и редактор текстов.\n## Задача\nТы должен внимательно прочитать предложенный текст, найти и исправить все орфографические, пунктуационные и грамматические ошибки.\nОтветь исправленным текстом БЕЗ пояснений.",
+    };
 
-Текст:
-${text}
-`;
+    const userMessage = {
+      created_at: Math.floor(Date.now() / 1000),
+      role: "user",
+      content: text,
+    };
 
-    const completion = await giga.chat({
-      model: "GigaChat",
+    const payload = {
       messages: [
         {
-          role: "system",
-          content:
-            "Ты — опытный корректор и редактор текстов.\n## Задача\nТы должен внимательно прочитать предложенный текст, найти и исправить все орфографические, пунктуационные и грамматические ошибки.",
-        },
-        {
-          created_at: 1760555874,
-          role: "user",
-          content:
-            "Маша, придя домой поздним вечером быстро сняла пальто бросила сумочку на диван и устало опустилась в кресло — ей было тяжело потому-что она весь день работала без отдыха.",
+          model: "GigaChat-2",
+          messages: [systemMessage, userMessage],
+          profanity_check: true,
         },
       ],
-    });
+    };
 
-    const result =
-      completion.choices?.[0]?.message?.content?.trim() ?? "Ошибка";
+    const resp = await giga.chat(payload);
+    const corrected = resp?.choices?.[0]?.message?.content ?? null;
 
-    return NextResponse.json({ result });
+    if (!corrected) {
+      console.error("Empty response from GigaChat:", resp);
+      return NextResponse.json(
+        { error: "Пустой ответ от GigaChat" },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ result: corrected });
   } catch (err: any) {
-    console.error("GigaChat API error:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    console.error("GigaChat route error:", err);
+    return NextResponse.json(
+      { error: err?.message ?? String(err) },
+      { status: 500 },
+    );
   }
 }
