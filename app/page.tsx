@@ -4,10 +4,10 @@ import { AppShell } from "@/components/ui";
 export default function Home() {
   return (
     <AppShell.Root>
-      <AppShell.Bar>
-        <div>123</div>
-        <div>1</div>
-      </AppShell.Bar>
+      {/*<AppShell.Bar>*/}
+      {/*  <div>123</div>*/}
+      {/*  <div>1</div>*/}
+      {/*</AppShell.Bar>*/}
       <AppShell.Notes>
         <AppShell.SideBar>
           <AppShell.Header>
