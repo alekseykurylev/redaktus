@@ -57,7 +57,7 @@ const NoteRoot = ({
         "aria-label": "Main content area, start typing to enter text.",
       },
     },
-    onUpdate: ({ editor }) => {
+    onBlur: ({ editor }) => {
       updateNote(id, editor.getJSON());
     },
     ...options,
@@ -144,8 +144,8 @@ const NoteTitle = ({ className }: { className?: string }) => {
         name="title"
         className="border"
         placeholder="Название"
-        value={note?.title}
-        onChange={(e) => handleChange(e.target.value)}
+        defaultValue={note?.title ?? ""}
+        onBlur={(e) => handleChange(e.target.value)}
       />
     </div>
   );
