@@ -14,7 +14,7 @@ export function Menubar({ editor }: { editor: Editor | null }) {
   });
 
   return (
-    <div className="flex gap-2 p-6">
+    <div className="flex gap-2">
       <button
         type="button"
         onClick={() => editor?.chain().focus().toggleBold().run()}
