@@ -19,7 +19,13 @@ export default function Home() {
           <div className="h-16 border p-3">12123123</div>
         </div>
       </div>
-      <Editor />
+      <div className="bg-white w-full">
+        <Editor.Root>
+          <Editor.Toolbar />
+          <Editor.Content />
+          <Editor.Footer />
+        </Editor.Root>
+      </div>
     </div>
   );
 }
