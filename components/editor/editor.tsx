@@ -1,12 +1,15 @@
 "use client";
+
 import {
   type Editor,
   EditorContent as EditorContentBase,
+  type UseEditorOptions,
   useEditor,
   useEditorState,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { type ComponentProps } from "react";
+import React, { type ComponentProps, type ReactNode } from "react";
+import { cx } from "@/lib/cva";
 
 interface EditorRootContext {
   editor: Editor | null;
@@ -27,22 +30,26 @@ function useEditorRootContext() {
   return value;
 }
 
-const EditorRoot = ({ ...props }: ComponentProps<"div">) => {
+const EditorRoot = ({
+  className,
+  children,
+  ...options
+}: UseEditorOptions & { className?: string; children: ReactNode }) => {
   const editor = useEditor({
     extensions: [StarterKit],
-    // content: "<p>Hello World! 🌎️</p>",
     immediatelyRender: false,
+    ...options,
   });
 
   return (
     <EditorRootContext.Provider value={{ editor }}>
-      <div className="h-full flex flex-col" {...props} />
+      <div className={cx("h-full flex flex-col", className)}>{children}</div>
     </EditorRootContext.Provider>
   );
 };
 EditorRoot.displayName = "Editor.Root";
 
-const EditorToolbar = () => {
+const EditorToolbar = ({ className }: { className?: string }) => {
   const { editor } = useEditorRootContext();
   const editorState = useEditorState({
     editor,
@@ -56,7 +63,7 @@ const EditorToolbar = () => {
     },
   });
   return (
-    <div className="py-4 flex items-center px-6">
+    <div className={cx("py-4 flex items-center px-6", className)}>
       <button
         type="button"
         onClick={() => editor?.chain().focus().toggleBold().run()}
@@ -96,19 +103,26 @@ const EditorToolbar = () => {
 };
 EditorToolbar.displayName = "Editor.Toolbar";
 
-const EditorContent = () => {
+const EditorContent = ({ className }: { className?: string }) => {
   const { editor } = useEditorRootContext();
   return (
     <EditorContentBase
-      className="grow *:px-6 *:h-full overflow-y-auto"
+      className={cx("grow *:px-6 *:h-full overflow-y-auto", className)}
       editor={editor}
     />
   );
 };
 EditorContent.displayName = "Editor.Content";
 
-const EditorFooter = () => {
-  return <div className="flex items-center px-6 text-xs py-4">123213</div>;
+const EditorFooter = ({ className, ...props }: ComponentProps<"div">) => {
+  return (
+    <div
+      className={cx("flex items-center px-6 text-xs py-4", className)}
+      {...props}
+    >
+      123213
+    </div>
+  );
 };
 EditorFooter.displayName = "Editor.Footer";
 

@@ -1,31 +1,38 @@
 import { Editor } from "@/components/editor";
+import { AppShell } from "@/components/ui";
 
 export default function Home() {
   return (
-    <div className=" m-3 h-[calc(100vh-(--spacing(6)))] overflow-hidden flex rounded-xl">
-      <div className="bg-white/85 shrink-0 border-r-1 border-r-gray-200 w-64 flex flex-col p-4">
-        <div className="mb-4">
-          <div className="text-2xl">Заметкус</div>
-          <button type="button" className="border">
-            Новая заметка
-          </button>
-        </div>
-        <div className="grow overflow-y-auto">
-          <div className="h-16 border p-3">12123123</div>
-          <div className="h-16 border p-3">12123123</div>
-          <div className="h-16 border p-3">12123123</div>
-          <div className="h-16 border p-3">12123123</div>
-          <div className="h-16 border p-3">12123123</div>
-          <div className="h-16 border p-3">12123123</div>
-        </div>
-      </div>
-      <div className="bg-white w-full">
-        <Editor.Root>
-          <Editor.Toolbar />
-          <Editor.Content />
-          <Editor.Footer />
-        </Editor.Root>
-      </div>
-    </div>
+    <AppShell.Root>
+      <AppShell.Bar>
+        <div>123</div>
+        <div>1</div>
+      </AppShell.Bar>
+      <AppShell.Notes>
+        <AppShell.SideBar>
+          <AppShell.Header>
+            <div className="text-2xl">Заметкус</div>
+            <button type="button" className="border">
+              Новая заметка
+            </button>
+          </AppShell.Header>
+          <AppShell.List>
+            <div className="h-16 border p-3">12123123</div>
+            <div className="h-16 border p-3">12123123</div>
+            <div className="h-16 border p-3">12123123</div>
+            <div className="h-16 border p-3">12123123</div>
+            <div className="h-16 border p-3">12123123</div>
+            <div className="h-16 border p-3">12123123</div>
+          </AppShell.List>
+        </AppShell.SideBar>
+        <AppShell.Note>
+          <Editor.Root>
+            <Editor.Toolbar />
+            <Editor.Content />
+            <Editor.Footer />
+          </Editor.Root>
+        </AppShell.Note>
+      </AppShell.Notes>
+    </AppShell.Root>
   );
 }
