@@ -10,9 +10,9 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@tiptap/pm": "^3.7.0",
-    "@tiptap/react": "^3.7.0",
-    "@tiptap/starter-kit": "^3.7.0",
+    "@tiptap/pm": "^3.7.2",
+    "@tiptap/react": "^3.7.2",
+    "@tiptap/starter-kit": "^3.7.2",
     "cva": "beta",
     "gigachat": "^0.0.16",
     "nanoid": "^5.1.6",

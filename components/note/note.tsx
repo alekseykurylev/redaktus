@@ -2,16 +2,18 @@
 
 import {
   type Editor,
-  EditorContent as EditorContentBase,
+  EditorContent,
   type UseEditorOptions,
   useEditor,
   useEditorState,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { type ComponentProps, type ReactNode } from "react";
+import React, { type ComponentProps, type ReactNode, useEffect } from "react";
 import { cx } from "@/lib/cva";
+import { useNote, useNoteActions } from "@/store/notes";
 
 interface EditorRootContext {
+  id: string;
   editor: Editor | null;
 }
 
@@ -19,38 +21,61 @@ const EditorRootContext = React.createContext<EditorRootContext | undefined>(
   undefined,
 );
 
-function useEditorRootContext() {
+function useNoteRootContext() {
   const value = React.useContext(EditorRootContext);
   if (value === undefined) {
     throw new Error(
-      "EditorRootContext is missing. Editor parts must be placed within <Editor.Root>.",
+      "NoteRootContext is missing. Editor parts must be placed within <Note.Root>.",
     );
   }
-
   return value;
 }
 
-const EditorRoot = ({
+const NoteRoot = ({
+  id,
   className,
   children,
   ...options
-}: UseEditorOptions & { className?: string; children: ReactNode }) => {
+}: UseEditorOptions & {
+  id: string;
+  className?: string;
+  children: ReactNode;
+}) => {
+  const note = useNote(id);
+  const { updateNote } = useNoteActions();
+
   const editor = useEditor({
     extensions: [StarterKit],
     immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
+    editorProps: {
+      attributes: {
+        autocomplete: "off",
+        autocorrect: "off",
+        autocapitalize: "off",
+        "aria-label": "Main content area, start typing to enter text.",
+      },
+    },
+    onUpdate: ({ editor }) => {
+      updateNote(id, editor.getJSON());
+    },
     ...options,
   });
 
+  useEffect(() => {
+    editor?.commands.setContent(note?.content ?? "");
+  }, [note, editor]);
+
   return (
-    <EditorRootContext.Provider value={{ editor }}>
+    <EditorRootContext.Provider value={{ id, editor }}>
       <div className={cx("h-full flex flex-col", className)}>{children}</div>
     </EditorRootContext.Provider>
   );
 };
-EditorRoot.displayName = "Editor.Root";
+NoteRoot.displayName = "Note.Root";
 
-const EditorToolbar = ({ className }: { className?: string }) => {
-  const { editor } = useEditorRootContext();
+const NoteToolbar = ({ className }: { className?: string }) => {
+  const { editor } = useNoteRootContext();
   const editorState = useEditorState({
     editor,
     selector: (ctx) => {
@@ -101,34 +126,59 @@ const EditorToolbar = ({ className }: { className?: string }) => {
     </div>
   );
 };
-EditorToolbar.displayName = "Editor.Toolbar";
+NoteToolbar.displayName = "Note.Toolbar";
 
-const EditorContent = ({ className }: { className?: string }) => {
-  const { editor } = useEditorRootContext();
+const NoteTitle = ({ className }: { className?: string }) => {
+  // const { id } = useNoteRootContext();
+  // const { updateNote } = useNoteActions();
+  //
+  // const handleChange = (value: string) => {
+  //   updateNote(id, { title: value });
+  // };
+
   return (
-    <EditorContentBase
-      className={cx("grow *:px-6 *:h-full overflow-y-auto", className)}
+    <div className={cx("px-6", className)}>
+      <input
+        name="title"
+        className="border"
+        placeholder="Название"
+        // onChange={(e) => handleChange(e.target.value)}
+      />
+    </div>
+  );
+};
+NoteTitle.displayName = "Note.Title";
+
+const NoteEditor = ({ className }: { className?: string }) => {
+  const { editor } = useNoteRootContext();
+  return (
+    <EditorContent
       editor={editor}
+      role="presentation"
+      className={cx("grow *:px-6 *:h-full overflow-y-auto", className)}
     />
   );
 };
-EditorContent.displayName = "Editor.Content";
+NoteEditor.displayName = "Note.Editor";
 
-const EditorFooter = ({ className, ...props }: ComponentProps<"div">) => {
+const NoteFooter = ({ className, ...props }: ComponentProps<"div">) => {
+  // const { editor } = useNoteRootContext();
+  // const wordsCount = editor?.storage.characterCount.words({});
   return (
     <div
       className={cx("flex items-center px-6 text-xs py-4", className)}
       {...props}
     >
-      123213
+      {/*{wordsCount}*/}
     </div>
   );
 };
-EditorFooter.displayName = "Editor.Footer";
+NoteFooter.displayName = "Note.Footer";
 
 export {
-  EditorRoot as Root,
-  EditorToolbar as Toolbar,
-  EditorContent as Content,
-  EditorFooter as Footer,
+  NoteRoot as Root,
+  NoteToolbar as Toolbar,
+  NoteTitle as Title,
+  NoteEditor as Editor,
+  NoteFooter as Footer,
 };
