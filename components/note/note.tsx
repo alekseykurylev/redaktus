@@ -1,5 +1,6 @@
 "use client";
 
+import { CharacterCount } from "@tiptap/extensions";
 import {
   type Editor,
   EditorContent,
@@ -45,7 +46,7 @@ const NoteRoot = ({
   const { updateNote } = useNoteActions();
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, CharacterCount],
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
     editorProps: {
@@ -129,20 +130,22 @@ const NoteToolbar = ({ className }: { className?: string }) => {
 NoteToolbar.displayName = "Note.Toolbar";
 
 const NoteTitle = ({ className }: { className?: string }) => {
-  // const { id } = useNoteRootContext();
-  // const { updateNote } = useNoteActions();
-  //
-  // const handleChange = (value: string) => {
-  //   updateNote(id, { title: value });
-  // };
+  const { id } = useNoteRootContext();
+  const note = useNote(id);
+  const { updateNote } = useNoteActions();
+
+  const handleChange = (value: string) => {
+    updateNote(id, { title: value });
+  };
 
   return (
-    <div className={cx("px-6", className)}>
+    <div className={cx("px-6 mb-3", className)}>
       <input
         name="title"
         className="border"
         placeholder="Название"
-        // onChange={(e) => handleChange(e.target.value)}
+        value={note?.title}
+        onChange={(e) => handleChange(e.target.value)}
       />
     </div>
   );
@@ -162,14 +165,22 @@ const NoteEditor = ({ className }: { className?: string }) => {
 NoteEditor.displayName = "Note.Editor";
 
 const NoteFooter = ({ className, ...props }: ComponentProps<"div">) => {
-  // const { editor } = useNoteRootContext();
-  // const wordsCount = editor?.storage.characterCount.words({});
+  const { editor } = useNoteRootContext();
+  const wordsCount = editor?.storage.characterCount.words();
+  const charactersCount = editor?.storage.characterCount.characters();
   return (
     <div
-      className={cx("flex items-center px-6 text-xs py-4", className)}
+      className={cx(
+        "flex items-center justify-between px-6 text-xs py-4",
+        className,
+      )}
       {...props}
     >
-      {/*{wordsCount}*/}
+      <div>123</div>
+      <div className="flex items-center gap-3 text-gray-500">
+        <div>{charactersCount} characters</div>
+        <div>{wordsCount} words</div>
+      </div>
     </div>
   );
 };

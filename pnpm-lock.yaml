@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@tiptap/extensions':
+    specifier: ^3.7.2
+    version: 3.7.2(@tiptap/core@3.7.2)(@tiptap/pm@3.7.2)
   '@tiptap/pm':
     specifier: ^3.7.2
     version: 3.7.2
