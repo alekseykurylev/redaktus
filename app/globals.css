@@ -18,11 +18,7 @@
   }
 
   body {
-    @apply relative bg-zinc-950 text-zinc-200;
-  }
-
-  .root {
-    @apply isolate;
+    @apply relative bg-zinc-950 font-sans text-zinc-200;
   }
 
   .tiptap {
