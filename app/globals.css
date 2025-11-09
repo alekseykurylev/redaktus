@@ -1,26 +1,47 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.141 0.005 285.823);
+  --border: oklch(0.92 0.004 286.32);
+  --ring: oklch(0.705 0.015 286.067);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply relative bg-zinc-950 text-zinc-200;
+  }
+
+  .root {
+    @apply isolate;
+  }
+
+  .tiptap {
+    &.ProseMirror > * {
+      @apply relative;
+    }
+
+    &.ProseMirror {
+      @apply whitespace-pre-wrap caret-white outline-none;
+    }
+
+    &.ProseMirror p:not(:first-child) {
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 400;
+      margin-top: 20px;
+    }
+  }
 }
