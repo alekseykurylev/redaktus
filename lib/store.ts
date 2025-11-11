@@ -94,4 +94,4 @@ export const useDocActive = () => useDocsStore((state) => state.activeId)
 
 export const useDocs = () => useDocsStore((state) => state.docs)
 
-export const useDocActions = () => useDocsStore((state) => state.actions)
+export const useDocsActions = () => useDocsStore((state) => state.actions)
