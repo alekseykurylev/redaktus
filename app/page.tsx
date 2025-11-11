@@ -25,7 +25,7 @@ export default function Home() {
         <AppShell.List>List</AppShell.List>
         <AppShell.Footer />
       </AppShell.Sidebar>
-      <AppShell.Doc>Doc</AppShell.Doc>
+      <AppShell.Doc>DocDocDoc</AppShell.Doc>
     </AppShell.Root>
   )
 }
