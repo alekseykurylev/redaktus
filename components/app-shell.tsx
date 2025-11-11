@@ -50,10 +50,10 @@ function AppShellFooter({ className, ...props }: ComponentProps<'div'>) {
 }
 AppShellFooter.displayName = 'AppShell.Footer'
 
-function AppShellNote({ className, ...props }: ComponentProps<'div'>) {
+function AppShellDoc({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      data-slot="app-shell-note"
+      data-slot="app-shell-doc"
       className={cx(
         'z-10 flex h-full w-full flex-col rounded-2xl bg-zinc-900 ring ring-white/10 max-md:min-w-full',
         className,
@@ -62,7 +62,7 @@ function AppShellNote({ className, ...props }: ComponentProps<'div'>) {
     />
   )
 }
-AppShellNote.displayName = 'AppShell.Note'
+AppShellDoc.displayName = 'AppShell.Doc'
 
 export {
   AppShellRoot as Root,
@@ -70,5 +70,5 @@ export {
   AppShellHeader as Header,
   AppShellList as List,
   AppShellFooter as Footer,
-  AppShellNote as Note,
+  AppShellDoc as Doc,
 }
