@@ -8,13 +8,13 @@ export default function Home() {
   const { load } = useDocsActions()
 
   const activeId = useDocActive()
-  const note = useDoc(activeId)
+  const doc = useDoc(activeId)
 
   useEffect(() => {
     load().catch()
   }, [])
 
-  if (!note) return null
+  if (!doc) return null
 
   return (
     <AppShell.Root>
