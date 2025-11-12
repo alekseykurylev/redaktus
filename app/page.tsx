@@ -11,8 +11,10 @@ export default function Home() {
   const doc = useDoc(activeId)
 
   useEffect(() => {
-    load().catch()
-  }, [])
+    if (typeof window !== 'undefined') {
+      load().catch()
+    }
+  }, [load])
 
   if (!doc) return null
 

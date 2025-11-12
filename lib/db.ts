@@ -1,4 +1,4 @@
-import { openDB, type DBSchema } from 'idb'
+import { openDB, type DBSchema, type IDBPDatabase } from 'idb'
 import type { Doc } from '@/lib/types'
 
 const DB_NAME = 'docs-db'
@@ -13,26 +13,36 @@ interface DocsDB extends DBSchema {
   }
 }
 
-const dbPromise = openDB<DocsDB>(DB_NAME, DB_VERSION, {
-  upgrade(db) {
-    if (!db.objectStoreNames.contains(STORE)) {
-      const store = db.createObjectStore(STORE, { keyPath: 'id' })
-      store.createIndex('by-updatedAt', 'updatedAt')
-    }
-  },
-})
+let dbPromise: Promise<IDBPDatabase<DocsDB>> | null = null
+
+function getDB() {
+  if (typeof window === 'undefined') {
+    throw new Error('IndexedDB is only available in the browser')
+  }
+  if (!dbPromise) {
+    dbPromise = openDB<DocsDB>(DB_NAME, DB_VERSION, {
+      upgrade(db) {
+        if (!db.objectStoreNames.contains(STORE)) {
+          const store = db.createObjectStore(STORE, { keyPath: 'id' })
+          store.createIndex('by-updatedAt', 'updatedAt')
+        }
+      },
+    })
+  }
+  return dbPromise
+}
 
 export async function getAllDocs() {
-  const db = await dbPromise
+  const db = await getDB()
   return await db.getAll(STORE)
 }
 
 export async function putDoc(doc: Doc) {
-  const db = await dbPromise
+  const db = await getDB()
   await db.put(STORE, doc)
 }
 
 export async function delDoc(id: string) {
-  const db = await dbPromise
+  const db = await getDB()
   await db.delete(STORE, id)
 }
