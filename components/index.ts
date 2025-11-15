@@ -1,2 +1,3 @@
 export * as AppShell from './app-shell'
 export * from './editor'
+export * from './docs-list'

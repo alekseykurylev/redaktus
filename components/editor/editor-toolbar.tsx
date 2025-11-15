@@ -1,6 +1,6 @@
 import { useEditorState } from '@tiptap/react'
 import { Collapsible } from '@base-ui-components/react/collapsible'
-import { Bold, Redo, Undo, PanelLeftIcon } from 'lucide-react'
+import { Bold, Redo, Undo, PanelLeftIcon, Trash2 } from 'lucide-react'
 import { useEditorRootContext } from './editor-context'
 import { Separator } from '../ui/separator'
 
@@ -49,7 +49,9 @@ export function EditorToolbar() {
           </button>
         </div>
       </div>
-      <button>remove</button>
+      <button>
+        <Trash2 />
+      </button>
     </div>
   )
 }
