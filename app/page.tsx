@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useDoc, useDocsActions, useDocActive } from '@/lib/store'
-import { AppShell } from '@/components'
+import { AppShell, Editor } from '@/components'
 
 export default function Home() {
   const { load } = useDocsActions()
@@ -27,7 +27,13 @@ export default function Home() {
         <AppShell.List>List</AppShell.List>
         <AppShell.Footer />
       </AppShell.Sidebar>
-      <AppShell.Doc>DocDocDoc</AppShell.Doc>
+      <AppShell.Doc>
+        <Editor.Root doc={doc}>
+          <Editor.Toolbar />
+          <Editor.Body />
+          <Editor.Footer />
+        </Editor.Root>
+      </AppShell.Doc>
     </AppShell.Root>
   )
 }
