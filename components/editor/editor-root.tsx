@@ -1,12 +1,11 @@
-import React from 'react'
-import { useEditor } from '@tiptap/react'
+import React, { useMemo } from 'react'
+import { useEditor, EditorContext } from '@tiptap/react'
 import { CharacterCount } from '@tiptap/extensions'
 import StarterKit from '@tiptap/starter-kit'
 import { useDebouncedCallback } from 'use-debounce'
 import { useDocsActions, useDocs } from '@/lib/store'
 import type { Doc } from '@/lib/types'
 import { getDocTitle } from '@/lib/helpers'
-import { EditorRootContext } from './editor-context'
 
 export function EditorRoot({ doc, children }: { doc: Doc; children: React.ReactNode }) {
   const { updateDoc, deleteDoc } = useDocsActions()
@@ -18,7 +17,7 @@ export function EditorRoot({ doc, children }: { doc: Doc; children: React.ReactN
 
   const editor = useEditor({
     extensions: [StarterKit, CharacterCount],
-    immediatelyRender: true,
+    immediatelyRender: false,
     shouldRerenderOnTransaction: true,
     autofocus: 'start',
     editorProps: {
@@ -48,5 +47,7 @@ export function EditorRoot({ doc, children }: { doc: Doc; children: React.ReactN
     },
   })
 
-  return <EditorRootContext.Provider value={{ editor }}>{children}</EditorRootContext.Provider>
+  const providerValue = useMemo(() => ({ editor }), [editor])
+
+  return <EditorContext.Provider value={providerValue}>{children}</EditorContext.Provider>
 }

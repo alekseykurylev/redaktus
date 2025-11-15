@@ -1,13 +1,12 @@
-import { useEditorState } from '@tiptap/react'
+import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { Collapsible } from '@base-ui-components/react/collapsible'
 import { Bold, Redo, Undo, PanelLeftIcon, Trash2, SquarePen } from 'lucide-react'
-import { useEditorRootContext } from './editor-context'
 import { Separator } from '../ui/separator'
 import { CreateDoc } from '../create-doc'
 import { RemoveDoc } from '../remove-doc'
 
 export function EditorToolbar() {
-  const { editor } = useEditorRootContext()
+  const { editor } = useCurrentEditor()
 
   const editorState = useEditorState({
     editor,

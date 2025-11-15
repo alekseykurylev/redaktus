@@ -1,10 +1,9 @@
-import { EditorContent } from '@tiptap/react'
+import { EditorContent, useCurrentEditor } from '@tiptap/react'
 import { ScrollArea } from '@base-ui-components/react/scroll-area'
 import { cx } from '@/lib/cva'
-import { useEditorRootContext } from './editor-context'
 
 export function EditorBody() {
-  const { editor } = useEditorRootContext()
+  const { editor } = useCurrentEditor()
 
   return (
     <ScrollArea.Root className="h-px grow">
