@@ -10,11 +10,12 @@ export function DocsList() {
     <div className="flex flex-col">
       {docs.map((doc) => (
         <button
-          type="button"
           key={doc.id}
+          type="button"
           onClick={() => setActive(doc.id)}
           className={cx(
             'space-y-1 rounded-md bg-transparent p-4 text-left',
+            'focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-500',
             doc.id === activeId && 'bg-white/5',
           )}
         >
