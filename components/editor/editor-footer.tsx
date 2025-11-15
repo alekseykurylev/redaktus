@@ -2,7 +2,6 @@ import { Editor, useCurrentEditor, useEditorState } from '@tiptap/react'
 
 export function EditorFooter() {
   const { editor } = useCurrentEditor()
-
   const editorState = useEditorState({
     editor,
     selector: (ctx) => {
