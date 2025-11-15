@@ -27,13 +27,13 @@ export default function Home() {
         <AppShell.List>List</AppShell.List>
         <AppShell.Footer />
       </AppShell.Sidebar>
-      <AppShell.Doc>
+      <AppShell.Body>
         <Editor.Root doc={doc}>
           <Editor.Toolbar />
           <Editor.Body />
           <Editor.Footer />
         </Editor.Root>
-      </AppShell.Doc>
+      </AppShell.Body>
     </AppShell.Root>
   )
 }
