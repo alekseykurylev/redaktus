@@ -3,20 +3,9 @@
 @theme inline {
   --font-sans: var(--font-ibm-plex-sans);
   --font-mono: var(--font-ibm-plex-mono);
-  --color-border: var(--border);
-  --color-ring: var(--ring);
-}
-
-:root {
-  --border: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
   body {
     @apply relative bg-zinc-950 font-sans text-zinc-200;
   }
