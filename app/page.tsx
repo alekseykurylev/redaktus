@@ -30,7 +30,7 @@ export default function Home() {
         <AppShell.Footer />
       </AppShell.Sidebar>
       <AppShell.Body>
-        <Editor.Root doc={doc}>
+        <Editor.Root key={activeId} doc={doc}>
           <Editor.Toolbar />
           <Editor.Body />
           <Editor.Footer />
