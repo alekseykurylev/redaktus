@@ -1,8 +1,9 @@
 import { useEditorState } from '@tiptap/react'
 import { Collapsible } from '@base-ui-components/react/collapsible'
-import { Bold, Redo, Undo, PanelLeftIcon, Trash2 } from 'lucide-react'
+import { Bold, Redo, Undo, PanelLeftIcon, Trash2, SquarePen } from 'lucide-react'
 import { useEditorRootContext } from './editor-context'
 import { Separator } from '../ui/separator'
+import { CreateDoc } from '../create-doc'
 
 export function EditorToolbar() {
   const { editor } = useEditorRootContext()
@@ -26,7 +27,9 @@ export function EditorToolbar() {
           <PanelLeftIcon />
         </Collapsible.Trigger>
         <Separator orientation="vertical" className="h-5" />
-        <button>create</button>
+        <CreateDoc>
+          <SquarePen />
+        </CreateDoc>
         <div className="flex items-center gap-2">
           <button
             onClick={() => editor?.chain().focus().toggleBold().run()}
