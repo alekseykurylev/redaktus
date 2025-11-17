@@ -14,6 +14,7 @@ export function CreateDoc(props: ComponentProps<'button'>) {
 
   return (
     <button
+      type="button"
       data-slot="create-doc"
       key={activeId}
       disabled={isDisabled}
