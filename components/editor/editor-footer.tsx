@@ -13,7 +13,7 @@ export function EditorFooter() {
   })
 
   return (
-    <div className="flex items-center justify-end border-t border-white/10 px-6 py-4 text-xs">
+    <div className="flex items-center justify-end border-t border-border px-6 py-4 text-xs">
       <div className="flex items-center gap-3">
         <div>{editorState?.wordsCount} characters</div>
         <div>{editorState?.charactersCount} words</div>

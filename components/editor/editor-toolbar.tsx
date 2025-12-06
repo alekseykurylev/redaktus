@@ -1,7 +1,7 @@
 import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { Collapsible } from '@base-ui-components/react/collapsible'
 import { Bold, Redo, Undo, PanelLeftIcon, Trash2, SquarePen } from 'lucide-react'
-import { Separator } from '../ui/separator'
+import { Separator } from '../ui'
 import { CreateDoc } from '../create-doc'
 import { RemoveDoc } from '../remove-doc'
 
@@ -21,7 +21,7 @@ export function EditorToolbar() {
   })
 
   return (
-    <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+    <div className="flex items-center justify-between border-b border-border px-6 py-4">
       <div className="flex items-center gap-6">
         <Collapsible.Trigger render={<button />}>
           <PanelLeftIcon />

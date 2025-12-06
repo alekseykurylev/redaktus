@@ -49,5 +49,9 @@ export function EditorRoot({ doc, children }: { doc: Doc; children: React.ReactN
 
   const providerValue = useMemo(() => ({ editor }), [editor])
 
-  return <EditorContext.Provider value={providerValue}>{children}</EditorContext.Provider>
+  return (
+    <EditorContext.Provider value={providerValue}>
+      <div className="flex h-full min-h-0 flex-col">{children}</div>
+    </EditorContext.Provider>
+  )
 }

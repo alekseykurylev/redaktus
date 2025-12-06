@@ -1,5 +1,6 @@
 export * as AppShell from './app-shell'
 export * from './editor'
-export * from './docs-list'
+export * from './list-docs'
 export * from './create-doc'
 export * from './remove-doc'
+export * from './toggle-theme'

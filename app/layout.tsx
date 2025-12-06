@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -25,9 +26,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" suppressHydrationWarning>
       <body className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} antialiased`}>
-        <div className="isolate">{children}</div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="isolate">{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   )

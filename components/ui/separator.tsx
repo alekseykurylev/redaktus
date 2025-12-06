@@ -9,8 +9,9 @@ export function Separator({
 }: ComponentProps<typeof SeparatorPrimitive>) {
   return (
     <SeparatorPrimitive
+      data-slot="separator"
       className={cx(
-        'w-px bg-white/10',
+        'w-px bg-border',
         orientation === 'vertical' && 'w-px',
         orientation === 'horizontal' && 'h-px',
         className,
