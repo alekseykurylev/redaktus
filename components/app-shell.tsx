@@ -10,7 +10,7 @@ function AppShellRoot({ className, ...props }: ComponentProps<typeof Collapsible
     <Collapsible.Root
       key={isMobile ? 'mobile' : 'other'}
       data-slot="app-shell"
-      className={cx('root flex h-screen bg-sidebar', className)}
+      className={cx('root flex h-screen overflow-hidden bg-sidebar', className)}
       defaultOpen={!isMobile}
       {...props}
     />
