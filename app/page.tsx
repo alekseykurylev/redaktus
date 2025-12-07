@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useDoc, useDocsActions, useDocActive } from '@/lib/store'
 import { AppShell, ListDocs, Editor, ToggleTheme } from '@/components'
-import { Sheet } from '@/components/ui'
+import { Sheet, Sidebar, ScrollArea } from '@/components/ui'
 
 export default function Home() {
   const { load } = useDocsActions()
@@ -20,29 +20,129 @@ export default function Home() {
   if (!doc) return null
 
   return (
-    <AppShell.Root>
-      <AppShell.Sidebar>
-        <AppShell.Header>
-          <h1 className="text-2xl font-bold">Редактус</h1>
-          <Sheet.Root>
-            <Sheet.Trigger>Trigger</Sheet.Trigger>
-            <Sheet.Popup>123312321</Sheet.Popup>
-          </Sheet.Root>
-        </AppShell.Header>
-        <AppShell.List>
-          <ListDocs />
-        </AppShell.List>
-        <AppShell.Footer>
+    <Sidebar.Provider>
+      <Sidebar.Root variant="inset">
+        <Sidebar.Header>Header</Sidebar.Header>
+        <div className="min-h-0 flex-1">
+          <ScrollArea.Root>
+            <ScrollArea.Viewport>
+              <Sidebar.Group>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+                <div>Group</div>
+              </Sidebar.Group>
+            </ScrollArea.Viewport>
+            <ScrollArea.Scrollbar>
+              <ScrollArea.Thumb />
+            </ScrollArea.Scrollbar>
+          </ScrollArea.Root>
+        </div>
+
+        {/* <Sidebar.Content>
+          <Sidebar.Group>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+            <div>Group</div>
+          </Sidebar.Group>
+        </Sidebar.Content> */}
+        <Sidebar.Footer>
           <ToggleTheme />
-        </AppShell.Footer>
-      </AppShell.Sidebar>
-      <AppShell.Body>
-        <Editor.Root key={activeId} doc={doc}>
-          <Editor.Toolbar />
-          <Editor.Body />
-          <Editor.Footer />
-        </Editor.Root>
-      </AppShell.Body>
-    </AppShell.Root>
+        </Sidebar.Footer>
+      </Sidebar.Root>
+      <Sidebar.Inset>
+        <div>
+          <div>toolbar</div>
+          <Sidebar.Trigger>Trigger</Sidebar.Trigger>
+        </div>
+        <div className="min-h-0 flex-1">
+          <ScrollArea.Root>
+            <ScrollArea.Viewport>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+              <div>Group</div>
+            </ScrollArea.Viewport>
+            <ScrollArea.Scrollbar>
+              <ScrollArea.Thumb />
+            </ScrollArea.Scrollbar>
+          </ScrollArea.Root>
+        </div>
+        <div>footer</div>
+      </Sidebar.Inset>
+    </Sidebar.Provider>
   )
+
+  // return (
+  //   <AppShell.Root>
+  //     <AppShell.Sidebar>
+  //       <AppShell.Header>
+  //         <h1 className="text-2xl font-bold">Редактус</h1>
+  //         <Sheet.Root>
+  //           <Sheet.Trigger>Trigger</Sheet.Trigger>
+  //           <Sheet.Popup>123312321</Sheet.Popup>
+  //         </Sheet.Root>
+  //       </AppShell.Header>
+  //       <AppShell.List>
+  //         <ListDocs />
+  //       </AppShell.List>
+  //       <AppShell.Footer>
+  //         <ToggleTheme />
+  //       </AppShell.Footer>
+  //     </AppShell.Sidebar>
+  //     <AppShell.Body>
+  //       <Editor.Root key={activeId} doc={doc}>
+  //         <Editor.Toolbar />
+  //         <Editor.Body />
+  //         <Editor.Footer />
+  //       </Editor.Root>
+  //     </AppShell.Body>
+  //   </AppShell.Root>
+  // )
 }

@@ -1,3 +1,5 @@
+export * from './button'
 export * as ScrollArea from './scroll-area'
 export * from './separator'
 export * as Sheet from './sheet'
+export * as Sidebar from './sidebar'
