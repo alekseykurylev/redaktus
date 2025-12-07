@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useDoc, useDocsActions, useDocActive } from '@/lib/store'
 import { AppShell, ListDocs, Editor, ToggleTheme } from '@/components'
+import { Sheet } from '@/components/ui'
 
 export default function Home() {
   const { load } = useDocsActions()
@@ -23,6 +24,10 @@ export default function Home() {
       <AppShell.Sidebar>
         <AppShell.Header>
           <h1 className="text-2xl font-bold">Редактус</h1>
+          <Sheet.Root>
+            <Sheet.Trigger>Trigger</Sheet.Trigger>
+            <Sheet.Popup>123312321</Sheet.Popup>
+          </Sheet.Root>
         </AppShell.Header>
         <AppShell.List>
           <ListDocs />
