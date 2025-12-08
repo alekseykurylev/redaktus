@@ -21,31 +21,15 @@ export default function Home() {
 
   return (
     <Sidebar.Provider>
-      <Sidebar.Root variant="inset">
-        <Sidebar.Header>Header</Sidebar.Header>
+      <Sidebar.Root>
+        <Sidebar.Header>
+          <h1 className="text-2xl font-bold">Редактус</h1>
+        </Sidebar.Header>
         <div className="min-h-0 flex-1">
           <ScrollArea.Root>
             <ScrollArea.Viewport>
               <Sidebar.Group>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
-                <div>Group</div>
+                <ListDocs />
               </Sidebar.Group>
             </ScrollArea.Viewport>
             <ScrollArea.Scrollbar>
@@ -53,30 +37,6 @@ export default function Home() {
             </ScrollArea.Scrollbar>
           </ScrollArea.Root>
         </div>
-
-        {/* <Sidebar.Content>
-          <Sidebar.Group>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-            <div>Group</div>
-          </Sidebar.Group>
-        </Sidebar.Content> */}
         <Sidebar.Footer>
           <ToggleTheme />
         </Sidebar.Footer>

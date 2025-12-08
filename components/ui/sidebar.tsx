@@ -130,7 +130,7 @@ function SidebarProvider({
 
 function SidebarRoot({
   side = 'left',
-  variant = 'sidebar',
+  variant = 'inset',
   collapsible = 'offcanvas',
   className,
   children,
