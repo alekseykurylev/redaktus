@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { ScrollArea as ScrollAreaPrimitive } from '@base-ui-components/react/scroll-area'
+import { ScrollArea as ScrollAreaPrimitive } from '@base-ui/react/scroll-area'
 import { cx } from '@/lib/cva'
 
 function ScrollAreaRoot({ className, ...props }: ComponentProps<typeof ScrollAreaPrimitive.Root>) {

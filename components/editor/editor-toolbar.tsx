@@ -1,5 +1,5 @@
 import { useCurrentEditor, useEditorState } from '@tiptap/react'
-import { Collapsible } from '@base-ui-components/react/collapsible'
+import { Collapsible } from '@base-ui/react/collapsible'
 import { Bold, Redo, Undo, PanelLeftIcon, Trash2, SquarePen } from 'lucide-react'
 import { Separator } from '../ui'
 import { CreateDoc } from '../create-doc'

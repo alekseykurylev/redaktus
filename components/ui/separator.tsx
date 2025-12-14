@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { Separator as SeparatorPrimitive } from '@base-ui-components/react/separator'
+import { Separator as SeparatorPrimitive } from '@base-ui/react/separator'
 import { cx } from '@/lib/cva'
 
 export function Separator({
