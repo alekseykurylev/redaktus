@@ -1,23 +1,20 @@
-import type { ComponentProps } from 'react'
+'use client'
+
 import { Separator as SeparatorPrimitive } from '@base-ui/react/separator'
 import { cx } from '@/lib/cva'
 
-export function Separator({
-  orientation,
-  className,
-  ...props
-}: ComponentProps<typeof SeparatorPrimitive>) {
+function Separator({ className, orientation = 'horizontal', ...props }: SeparatorPrimitive.Props) {
   return (
     <SeparatorPrimitive
       data-slot="separator"
+      orientation={orientation}
       className={cx(
-        'w-px bg-border',
-        orientation === 'vertical' && 'w-px',
-        orientation === 'horizontal' && 'h-px',
+        'shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:self-stretch',
         className,
       )}
-      orientation={orientation}
       {...props}
     />
   )
 }
+
+export { Separator }

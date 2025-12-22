@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react'
 import { useDoc, useDocsActions, useDocActive } from '@/lib/store'
-import { AppShell, ListDocs, Editor, ToggleTheme } from '@/components'
-import { Sheet, Sidebar, ScrollArea } from '@/components/ui'
+import { ListItems, Editor, ToggleTheme } from '@/components'
+import { Sidebar, ScrollArea } from '@/components/ui'
 
 export default function Home() {
   const { load } = useDocsActions()
@@ -25,18 +25,14 @@ export default function Home() {
         <Sidebar.Header>
           <h1 className="text-2xl font-bold">Редактус</h1>
         </Sidebar.Header>
-        <div className="min-h-0 flex-1">
-          <ScrollArea.Root>
-            <ScrollArea.Viewport>
-              <Sidebar.Group>
-                <ListDocs />
-              </Sidebar.Group>
-            </ScrollArea.Viewport>
-            <ScrollArea.Scrollbar>
-              <ScrollArea.Thumb />
-            </ScrollArea.Scrollbar>
-          </ScrollArea.Root>
-        </div>
+
+        <Sidebar.Content>
+          <Sidebar.Group>
+            <Sidebar.GroupContent>
+              <ListItems />
+            </Sidebar.GroupContent>
+          </Sidebar.Group>
+        </Sidebar.Content>
         <Sidebar.Footer>
           <ToggleTheme />
         </Sidebar.Footer>
@@ -44,7 +40,7 @@ export default function Home() {
       <Sidebar.Inset>
         <div>
           <div>toolbar</div>
-          <Sidebar.Trigger>Trigger</Sidebar.Trigger>
+          <Sidebar.Trigger />
         </div>
         <div className="min-h-0 flex-1">
           <ScrollArea.Root>
