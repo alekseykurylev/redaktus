@@ -51,7 +51,7 @@ export default function Home() {
           </Sidebar.Group>
         </Sidebar.Content>
         <Sidebar.Footer>
-          <Sidebar.Group className="flex-row justify-between gap-2">
+          <Sidebar.Group className="flex-row justify-between gap-2 py-0">
             <Button variant="ghost" size="icon-sm">
               <CircleQuestionMark />
             </Button>
