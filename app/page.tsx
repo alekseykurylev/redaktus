@@ -2,8 +2,9 @@
 
 import { useEffect } from 'react'
 import { useDoc, useDocsActions, useDocActive } from '@/lib/store'
-import { ListItems, Editor, ToggleTheme } from '@/components'
-import { Sidebar, ScrollArea } from '@/components/ui'
+import { ListItems, Editor, ToggleTheme, SearchForm, CreateItem } from '@/components'
+import { Button, Sidebar } from '@/components/ui'
+import { Edit, CircleQuestionMark } from 'lucide-react'
 
 export default function Home() {
   const { load } = useDocsActions()
@@ -20,10 +21,26 @@ export default function Home() {
   if (!doc) return null
 
   return (
-    <Sidebar.Provider>
+    <Sidebar.Provider
+      style={
+        {
+          '--sidebar-width': 'calc(var(--spacing) * 72)',
+          '--header-height': 'calc(var(--spacing) * 16)',
+        } as React.CSSProperties
+      }
+    >
       <Sidebar.Root>
         <Sidebar.Header>
-          <h1 className="text-2xl font-bold">Редактус</h1>
+          <div className="flex items-center justify-between p-2">
+            <div className="flex gap-2">
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <Edit className="size-4" />
+              </div>
+              <div className="text-2xl font-bold">Редактус</div>
+            </div>
+            <CreateItem />
+          </div>
+          <SearchForm />
         </Sidebar.Header>
 
         <Sidebar.Content>
@@ -34,71 +51,21 @@ export default function Home() {
           </Sidebar.Group>
         </Sidebar.Content>
         <Sidebar.Footer>
-          <ToggleTheme />
+          <Sidebar.Group className="flex-row justify-between gap-2">
+            <Button variant="ghost" size="icon-sm">
+              <CircleQuestionMark />
+            </Button>
+            <ToggleTheme />
+          </Sidebar.Group>
         </Sidebar.Footer>
       </Sidebar.Root>
       <Sidebar.Inset>
-        <div>
-          <div>toolbar</div>
-          <Sidebar.Trigger />
-        </div>
-        <div className="min-h-0 flex-1">
-          <ScrollArea.Root>
-            <ScrollArea.Viewport>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-              <div>Group</div>
-            </ScrollArea.Viewport>
-            <ScrollArea.Scrollbar>
-              <ScrollArea.Thumb />
-            </ScrollArea.Scrollbar>
-          </ScrollArea.Root>
-        </div>
-        <div>footer</div>
+        <Editor.Root key={activeId} doc={doc}>
+          <Editor.Toolbar />
+          <Editor.Body />
+          <Editor.Footer />
+        </Editor.Root>
       </Sidebar.Inset>
     </Sidebar.Provider>
   )
-
-  // return (
-  //   <AppShell.Root>
-  //     <AppShell.Sidebar>
-  //       <AppShell.Header>
-  //         <h1 className="text-2xl font-bold">Редактус</h1>
-  //         <Sheet.Root>
-  //           <Sheet.Trigger>Trigger</Sheet.Trigger>
-  //           <Sheet.Popup>123312321</Sheet.Popup>
-  //         </Sheet.Root>
-  //       </AppShell.Header>
-  //       <AppShell.List>
-  //         <ListDocs />
-  //       </AppShell.List>
-  //       <AppShell.Footer>
-  //         <ToggleTheme />
-  //       </AppShell.Footer>
-  //     </AppShell.Sidebar>
-  //     <AppShell.Body>
-  //       <Editor.Root key={activeId} doc={doc}>
-  //         <Editor.Toolbar />
-  //         <Editor.Body />
-  //         <Editor.Footer />
-  //       </Editor.Root>
-  //     </AppShell.Body>
-  //   </AppShell.Root>
-  // )
 }

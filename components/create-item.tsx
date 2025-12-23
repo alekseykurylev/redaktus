@@ -1,7 +1,9 @@
 import { ComponentProps } from 'react'
 import { useDoc, useDocsActions, useDocActive } from '@/lib/store'
+import { Button } from '@/components/ui'
+import { Plus } from 'lucide-react'
 
-export function CreateDoc(props: ComponentProps<'button'>) {
+export function CreateItem() {
   const activeId = useDocActive()
   const doc = useDoc(activeId)
   const { createDoc } = useDocsActions()
@@ -13,14 +15,17 @@ export function CreateDoc(props: ComponentProps<'button'>) {
   const isDisabled = doc?.title?.length === 0
 
   return (
-    <button
-      type="button"
-      data-slot="create-doc"
+    <Button
+      data-slot="create-item"
       key={activeId}
       disabled={isDisabled}
       onPointerDown={(e) => e.preventDefault()}
       onClick={handleClick}
-      {...props}
-    />
+      variant="outline"
+      size="icon-sm"
+    >
+      <Plus />
+      <span className="sr-only">Создать</span>
+    </Button>
   )
 }

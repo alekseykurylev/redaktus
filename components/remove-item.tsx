@@ -1,7 +1,10 @@
-import { ComponentProps } from 'react'
-import { useDocs, useDocsActions, useDocActive } from '@/lib/store'
+'use client'
 
-export function RemoveDoc(props: ComponentProps<'button'>) {
+import { useDocs, useDocsActions, useDocActive } from '@/lib/store'
+import { Button } from '@/components/ui'
+import { Trash2 } from 'lucide-react'
+
+export function RemoveItem() {
   const activeId = useDocActive()
   const docs = useDocs()
   const { deleteDoc } = useDocsActions()
@@ -13,12 +16,15 @@ export function RemoveDoc(props: ComponentProps<'button'>) {
   const isDisabled = docs.length === 1
 
   return (
-    <button
-      data-slot="remove-doc"
+    <Button
+      data-slot="remove-item"
+      variant="ghost"
+      size="icon-sm"
       key={activeId}
       disabled={isDisabled}
       onClick={handleRemove}
-      {...props}
-    />
+    >
+      <Trash2 />
+    </Button>
   )
 }

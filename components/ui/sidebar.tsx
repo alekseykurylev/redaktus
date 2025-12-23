@@ -345,6 +345,56 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<'div'>) {
 }
 SidebarGroup.displayName = 'Sidebar.Group'
 
+function SidebarGroupLabel({
+  className,
+  render,
+  ...props
+}: useRender.ComponentProps<'div'> & React.ComponentProps<'div'>) {
+  return useRender({
+    defaultTagName: 'div',
+    props: mergeProps<'div'>(
+      {
+        className: cx(
+          'flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
+          className,
+        ),
+      },
+      props,
+    ),
+    render,
+    state: {
+      slot: 'sidebar-group-label',
+      sidebar: 'group-label',
+    },
+  })
+}
+SidebarGroupLabel.displayName = 'Sidebar.GroupLabel'
+
+function SidebarGroupAction({
+  className,
+  render,
+  ...props
+}: useRender.ComponentProps<'button'> & React.ComponentProps<'button'>) {
+  return useRender({
+    defaultTagName: 'button',
+    props: mergeProps<'button'>(
+      {
+        className: cx(
+          'absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground ring-sidebar-ring outline-hidden transition-transform group-data-[collapsible=icon]:hidden after:absolute after:-inset-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 md:after:hidden [&>svg]:size-4 [&>svg]:shrink-0',
+          className,
+        ),
+      },
+      props,
+    ),
+    render,
+    state: {
+      slot: 'sidebar-group-action',
+      sidebar: 'group-action',
+    },
+  })
+}
+SidebarGroupAction.displayName = 'Sidebar.GroupAction'
+
 function SidebarGroupContent({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
@@ -596,9 +646,9 @@ export {
   SidebarContent as Content,
   SidebarFooter as Footer,
   SidebarGroup as Group,
-  //   SidebarGroupAction as GroupAction,
+  SidebarGroupAction as GroupAction,
   SidebarGroupContent as GroupContent,
-  //   SidebarGroupLabel as GroupLabel,
+  SidebarGroupLabel as GroupLabel,
   SidebarHeader as Header,
   SidebarInput as Input,
   SidebarInset as Inset,

@@ -1,6 +1,7 @@
 export * from './button'
 export * from './input'
 export * as Item from './item'
+export * from './label'
 export * as ScrollArea from './scroll-area'
 export * from './separator'
 export * as Sheet from './sheet'
