@@ -1,18 +1,16 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
-const ibmPlexSans = IBM_Plex_Sans({
+const geistSans = Geist({
+  variable: '--font-sans',
   subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-ibm-plex-sans',
 })
 
-const ibmPlexMono = IBM_Plex_Mono({
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
   subsets: ['latin', 'cyrillic'],
-  variable: '--font-ibm-plex-mono',
-  weight: ['400', '500', '700'],
 })
 
 export const metadata: Metadata = {
@@ -26,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ru" suppressHydrationWarning>
-      <body className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} antialiased`}>
+    <html lang="ru" className={geistSans.variable} suppressHydrationWarning>
+      <body className={`${geistMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

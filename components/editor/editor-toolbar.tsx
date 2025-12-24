@@ -2,7 +2,17 @@
 
 import * as React from 'react'
 import { useCurrentEditor, useEditorState } from '@tiptap/react'
-import { Bold, Redo, Undo, PanelLeftIcon, Trash2, SquarePen } from 'lucide-react'
+import {
+  Bold,
+  Redo,
+  Undo,
+  PanelLeftIcon,
+  Trash2,
+  SquarePen,
+  Code,
+  CodeSquare,
+  Eraser,
+} from 'lucide-react'
 import { Sidebar, Separator, Button } from '@/components/ui'
 import { RemoveItem } from '@/components'
 
@@ -17,6 +27,10 @@ export function EditorToolbar() {
         canBold: ctx.editor?.can().chain().toggleBold().run() ?? false,
         canUndo: ctx.editor?.can().chain().undo().run() ?? false,
         canRedo: ctx.editor?.can().chain().redo().run() ?? false,
+        isCode: ctx.editor?.isActive('code') ?? false,
+        canCode: ctx.editor?.can().chain().toggleCode().run() ?? false,
+        isCodeBlock: ctx.editor?.isActive('codeBlock') ?? false,
+        canClearMarks: ctx.editor?.can().chain().unsetAllMarks().run() ?? false,
       }
     },
   })
@@ -36,7 +50,7 @@ export function EditorToolbar() {
               size="icon-sm"
               onClick={() => editor?.chain().focus().toggleBold().run()}
               disabled={!editorState?.canBold}
-              // className={editorState?.isBold ? "is-active border" : "border"}
+              className={editorState?.isBold ? 'is-active' : ''}
             >
               <Bold />
             </Button>
@@ -56,6 +70,31 @@ export function EditorToolbar() {
             >
               <Redo />
             </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => editor?.chain().focus().toggleCode().run()}
+              disabled={!editorState?.canCode}
+              className={editorState?.isCode ? 'is-active' : ''}
+            >
+              <Code />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
+              className={editorState?.isCodeBlock ? 'is-active' : ''}
+            >
+              <CodeSquare />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => editor?.chain().focus().unsetAllMarks().run()}
+            >
+              <Eraser />
+            </Button>
+            {/* <button onClick={() => editor?.chain().focus().clearNodes().run()}>Clear nodes</button> */}
           </div>
           <RemoveItem />
         </div>
