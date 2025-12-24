@@ -124,6 +124,14 @@
   }
 }
 
+.dark {
+  @import './hljs-dark.css';
+}
+
+.light {
+  @import './hljs-light.css';
+}
+
 .tiptap {
   &.ProseMirror > * {
     @apply relative;
@@ -136,10 +144,10 @@
       @apply rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm;
     }
     pre {
-      @apply mt-6 rounded border border-border bg-muted px-4 py-6 font-mono text-sm;
+      @apply mt-6 rounded border border-border bg-muted px-4 pt-10 pb-4 font-mono text-sm;
 
       code {
-        @apply border-r-0 border-none bg-transparent text-inherit;
+        @apply border-r-0 border-none bg-transparent px-0 py-0 text-inherit;
       }
     }
   }

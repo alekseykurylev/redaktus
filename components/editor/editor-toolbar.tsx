@@ -2,17 +2,7 @@
 
 import * as React from 'react'
 import { useCurrentEditor, useEditorState } from '@tiptap/react'
-import {
-  Bold,
-  Redo,
-  Undo,
-  PanelLeftIcon,
-  Trash2,
-  SquarePen,
-  Code,
-  CodeSquare,
-  Eraser,
-} from 'lucide-react'
+import { Bold, Redo, Undo, Code, CodeSquare, Eraser } from 'lucide-react'
 import { Sidebar, Separator, Button } from '@/components/ui'
 import { RemoveItem } from '@/components'
 
@@ -48,15 +38,6 @@ export function EditorToolbar() {
             <Button
               variant="ghost"
               size="icon-sm"
-              onClick={() => editor?.chain().focus().toggleBold().run()}
-              disabled={!editorState?.canBold}
-              className={editorState?.isBold ? 'is-active' : ''}
-            >
-              <Bold />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-sm"
               onClick={() => editor?.chain().focus().undo().run()}
               disabled={!editorState?.canUndo}
             >
@@ -69,6 +50,15 @@ export function EditorToolbar() {
               disabled={!editorState?.canRedo}
             >
               <Redo />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => editor?.chain().focus().toggleBold().run()}
+              disabled={!editorState?.canBold}
+              className={editorState?.isBold ? 'is-active' : ''}
+            >
+              <Bold />
             </Button>
             <Button
               variant="ghost"

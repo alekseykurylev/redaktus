@@ -1,11 +1,18 @@
+'use client'
+
 import React, { useMemo } from 'react'
-import { useEditor, EditorContext } from '@tiptap/react'
+import { useEditor, EditorContext, ReactNodeViewRenderer } from '@tiptap/react'
 import { CharacterCount } from '@tiptap/extensions'
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import StarterKit from '@tiptap/starter-kit'
 import { useDebouncedCallback } from 'use-debounce'
+import { all, createLowlight } from 'lowlight'
 import { useDocsActions, useDocs } from '@/lib/store'
 import type { Doc } from '@/lib/types'
 import { getDocTitle } from '@/lib/helpers'
+import { CodeBlock } from './code-block'
+
+const lowlight = createLowlight(all)
 
 export function EditorRoot({ doc, children }: { doc: Doc; children: React.ReactNode }) {
   const { updateDoc, deleteDoc } = useDocsActions()
@@ -16,7 +23,15 @@ export function EditorRoot({ doc, children }: { doc: Doc; children: React.ReactN
   }, 200)
 
   const editor = useEditor({
-    extensions: [StarterKit, CharacterCount],
+    extensions: [
+      StarterKit,
+      CharacterCount,
+      CodeBlockLowlight.extend({
+        addNodeView() {
+          return ReactNodeViewRenderer(CodeBlock)
+        },
+      }).configure({ lowlight }),
+    ],
     immediatelyRender: false,
     shouldRerenderOnTransaction: true,
     autofocus: 'start',
