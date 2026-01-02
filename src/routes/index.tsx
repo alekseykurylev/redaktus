@@ -4,8 +4,7 @@ import { createFileRoute, Link } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    const docs = await db.docs.orderBy("updatedAt").reverse().toArray()
-    return docs
+    return db.docs.orderBy("updatedAt").reverse().toArray()
   },
   component: App,
 })
