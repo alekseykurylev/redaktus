@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import * as React from 'react'
+import * as React from "react"
 import {
   Sidebar,
   SidebarContent,
@@ -10,11 +10,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from '@/components/ui/sidebar'
-import { NavDocs } from './nav-docs'
-import { NavMain } from './nav-main'
-import { Link } from '@tanstack/react-router'
-import { NavSecondary } from './nav-secondary'
+} from "@/components/ui/sidebar"
+import { NavDocs } from "./nav-docs"
+import { NavMain } from "./nav-main"
+import { Link } from "@tanstack/react-router"
+import { NavSecondary } from "./nav-secondary"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (

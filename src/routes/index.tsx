@@ -1,10 +1,10 @@
-import { db } from '@/lib/db'
-import { IconFile } from '@tabler/icons-react'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { db } from "@/lib/db"
+import { IconFile } from "@tabler/icons-react"
+import { createFileRoute, Link } from "@tanstack/react-router"
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   loader: async () => {
-    const docs = await db.docs.orderBy('updatedAt').reverse().toArray()
+    const docs = await db.docs.orderBy("updatedAt").reverse().toArray()
     return docs
   },
   component: App,
@@ -23,7 +23,7 @@ function App() {
               <li key={item.id}>
                 <Link to="/$docId" params={{ docId: item.id }} title={item.title}>
                   <span>{item.emoji || <IconFile />}</span>
-                  <span>{item.title || 'Без названия'}</span>
+                  <span>{item.title || "Без названия"}</span>
                 </Link>
               </li>
             ))}

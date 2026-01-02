@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react'
-import ContentEditable from 'react-basic-contenteditable'
-import { useDebouncedCallback } from 'use-debounce'
-import { useDocActions } from '@/hooks/use-doc-actions'
+import { useRef, useState } from "react"
+import ContentEditable from "react-basic-contenteditable"
+import { useDebouncedCallback } from "use-debounce"
+import { useDocActions } from "@/hooks/use-doc-actions"
 
 export function DocTitle({ id, title }: { id: string; title: string }) {
   const { handleSaveTitle } = useDocActions()
@@ -24,7 +24,7 @@ export function DocTitle({ id, title }: { id: string; title: string }) {
   return (
     <ContentEditable
       updatedContent={title}
-      placeholder={!currentContent ? 'Без названия' : ''}
+      placeholder={!currentContent ? "Без названия" : ""}
       containerClassName="text-4xl font-semibold"
       contentEditableClassName="max-w-full w-full p-0! overflow-hidden! focus-visible:outline-0"
       placeholderClassName="text-muted-foreground/50"

@@ -1,6 +1,6 @@
-import { IconPlus, IconSearch } from '@tabler/icons-react'
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from './ui/sidebar'
-import { useDocActions } from '@/hooks/use-doc-actions'
+import { IconPlus, IconSearch } from "@tabler/icons-react"
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar"
+import { useDocActions } from "@/hooks/use-doc-actions"
 
 export function NavMain() {
   const { handleAddDoc } = useDocActions()

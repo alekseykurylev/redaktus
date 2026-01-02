@@ -1,9 +1,9 @@
-import { useNavigate } from '@tanstack/react-router'
-import type { EditorContentJSON } from '@/lib/types'
-import { db } from '@/lib/db'
+import { useNavigate } from "@tanstack/react-router"
+import type { EditorContentJSON } from "@/lib/types"
+import { db } from "@/lib/db"
 
 const EMPTY_DOC: EditorContentJSON = {
-  type: 'doc',
+  type: "doc",
   content: [],
 }
 
@@ -15,10 +15,10 @@ export function useDocActions() {
     const now = new Date()
 
     try {
-      await db.transaction('rw', db.docs, db.contents, async () => {
+      await db.transaction("rw", db.docs, db.contents, async () => {
         await db.docs.add({
           id,
-          title: '',
+          title: "",
           updatedAt: now,
         })
 
@@ -29,11 +29,11 @@ export function useDocActions() {
       })
 
       navigate({
-        to: '/$docId',
+        to: "/$docId",
         params: { docId: id },
       })
     } catch (error) {
-      console.error('Failed to create document', error)
+      console.error("Failed to create document", error)
     }
   }
 
@@ -41,25 +41,25 @@ export function useDocActions() {
     try {
       let nextDocId: string | null = null
 
-      await db.transaction('rw', db.docs, db.contents, async () => {
+      await db.transaction("rw", db.docs, db.contents, async () => {
         await db.docs.delete(id)
         await db.contents.delete(id)
 
-        const docs = await db.docs.orderBy('updatedAt').reverse().toArray()
+        const docs = await db.docs.orderBy("updatedAt").reverse().toArray()
 
         nextDocId = docs[0]?.id ?? null
       })
 
       if (nextDocId) {
         navigate({
-          to: '/$docId',
+          to: "/$docId",
           params: { docId: nextDocId },
         })
       } else {
-        navigate({ to: '/' })
+        navigate({ to: "/" })
       }
     } catch (error) {
-      console.error('Failed to delete document', error)
+      console.error("Failed to delete document", error)
     }
   }
 
@@ -69,7 +69,7 @@ export function useDocActions() {
     try {
       await db.docs.update(id, { title, updatedAt: now })
     } catch (error) {
-      console.error('Failed to save title', error)
+      console.error("Failed to save title", error)
     }
   }
 
@@ -77,12 +77,12 @@ export function useDocActions() {
     const now = new Date()
 
     try {
-      await db.transaction('rw', db.contents, db.docs, async () => {
+      await db.transaction("rw", db.contents, db.docs, async () => {
         await db.contents.update(id, { data: content })
         await db.docs.update(id, { updatedAt: now })
       })
     } catch (error) {
-      console.error('Failed to save content', error)
+      console.error("Failed to save content", error)
     }
   }
 

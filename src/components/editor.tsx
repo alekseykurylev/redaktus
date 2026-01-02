@@ -1,14 +1,14 @@
-import { useMemo, useRef } from 'react'
-import { useEditor, EditorContent, EditorContext, ReactNodeViewRenderer } from '@tiptap/react'
-import { CharacterCount } from '@tiptap/extensions'
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
-import { all, createLowlight } from 'lowlight'
-import { useDebouncedCallback } from 'use-debounce'
+import { useMemo, useRef } from "react"
+import { useEditor, EditorContent, EditorContext, ReactNodeViewRenderer } from "@tiptap/react"
+import { CharacterCount } from "@tiptap/extensions"
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
+import { all, createLowlight } from "lowlight"
+import { useDebouncedCallback } from "use-debounce"
 // import { FloatingMenu, BubbleMenu } from '@tiptap/react/menus'
-import StarterKit from '@tiptap/starter-kit'
-import { useDocActions } from '@/hooks/use-doc-actions'
-import type { EditorContentJSON } from '@/lib/types'
-import { CodeBlock } from './code-block'
+import StarterKit from "@tiptap/starter-kit"
+import { useDocActions } from "@/hooks/use-doc-actions"
+import type { EditorContentJSON } from "@/lib/types"
+import { CodeBlock } from "./code-block"
 
 const lowlight = createLowlight(all)
 
@@ -33,7 +33,7 @@ export function Editor({ id, content }: { id: string; content: EditorContentJSON
         },
       }).configure({
         lowlight,
-        defaultLanguage: 'javascript',
+        defaultLanguage: "javascript",
       }),
     ],
     onUpdate: async ({ editor }) => {

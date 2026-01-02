@@ -1,13 +1,13 @@
-import { IconArrowUpRight, IconDots, IconStarOff, IconTrash } from '@tabler/icons-react'
-import { Button } from './ui/button'
+import { IconArrowUpRight, IconDots, IconStarOff, IconTrash } from "@tabler/icons-react"
+import { Button } from "./ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu'
-import { useDocActions } from '@/hooks/use-doc-actions'
+} from "./ui/dropdown-menu"
+import { useDocActions } from "@/hooks/use-doc-actions"
 
 export function DocMenu({ id }: { id: string }) {
   const { handleDeleteDoc } = useDocActions()

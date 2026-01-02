@@ -1,5 +1,5 @@
-import { NodeViewContent, NodeViewWrapper, type ReactNodeViewProps } from '@tiptap/react'
-import { NativeSelect, NativeSelectOption } from './ui/native-select'
+import { NodeViewContent, NodeViewWrapper, type ReactNodeViewProps } from "@tiptap/react"
+import { NativeSelect, NativeSelectOption } from "./ui/native-select"
 
 export function CodeBlock({
   extension,
@@ -12,7 +12,7 @@ export function CodeBlock({
         size="sm"
         className="absolute top-1.5 right-1.5"
         contentEditable={false}
-        defaultValue={node.attrs.language ?? 'null'}
+        defaultValue={node.attrs.language ?? "null"}
         onChange={(event) => updateAttributes({ language: event.target.value })}
       >
         <NativeSelectOption value="null">auto</NativeSelectOption>
@@ -24,7 +24,7 @@ export function CodeBlock({
         ))}
       </NativeSelect>
       <pre>
-        <NodeViewContent as={'code' as 'div'} />
+        <NodeViewContent as={"code" as "div"} />
       </pre>
     </NodeViewWrapper>
   )

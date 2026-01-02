@@ -1,6 +1,6 @@
-import { useLiveQuery } from 'dexie-react-hooks'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage } from './ui/breadcrumb'
-import { db } from '@/lib/db'
+import { useLiveQuery } from "dexie-react-hooks"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage } from "./ui/breadcrumb"
+import { db } from "@/lib/db"
 
 export function DocBreadcrumb({ id }: { id: string }) {
   const doc = useLiveQuery(() => db.docs.get(id))
@@ -11,7 +11,7 @@ export function DocBreadcrumb({ id }: { id: string }) {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbPage className="line-clamp-1">{doc.title || 'Без названия'}</BreadcrumbPage>
+          <BreadcrumbPage className="line-clamp-1">{doc.title || "Без названия"}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

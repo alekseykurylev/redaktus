@@ -1,12 +1,12 @@
-import { IconSend, IconSettings } from '@tabler/icons-react'
+import { IconSend, IconSettings } from "@tabler/icons-react"
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from './ui/sidebar'
-import { useTheme } from './theme-provider'
+} from "./ui/sidebar"
+import { useTheme } from "./theme-provider"
 
 export function NavSecondary() {
   const { setTheme, theme } = useTheme()
@@ -16,7 +16,7 @@ export function NavSecondary() {
       <SidebarGroupContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+            <SidebarMenuButton onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
               <IconSettings />
               <span>Настройки</span>
             </SidebarMenuButton>

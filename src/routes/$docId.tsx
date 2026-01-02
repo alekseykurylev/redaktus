@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { Editor } from '@/components/editor'
-import { Separator } from '@/components/ui/separator'
-import { SidebarTrigger } from '@/components/ui/sidebar'
-import { createFileRoute, notFound } from '@tanstack/react-router'
-import { db } from '@/lib/db'
-import { DocTitle } from '@/components/doc-title'
-import { DocMenu } from '@/components/doc-menu'
-import { DocBreadcrumb } from '@/components/doc-breadcrumb'
+import * as React from "react"
+import { Editor } from "@/components/editor"
+import { Separator } from "@/components/ui/separator"
+import { SidebarTrigger } from "@/components/ui/sidebar"
+import { createFileRoute, notFound } from "@tanstack/react-router"
+import { db } from "@/lib/db"
+import { DocTitle } from "@/components/doc-title"
+import { DocMenu } from "@/components/doc-menu"
+import { DocBreadcrumb } from "@/components/doc-breadcrumb"
 
-export const Route = createFileRoute('/$docId')({
+export const Route = createFileRoute("/$docId")({
   loader: async ({ params }) => {
     const doc = await db.docs.get(params.docId)
     const content = await db.contents.get(params.docId)

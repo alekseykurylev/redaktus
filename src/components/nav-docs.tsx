@@ -1,5 +1,5 @@
-import { db } from '@/lib/db'
-import { useLiveQuery } from 'dexie-react-hooks'
+import { db } from "@/lib/db"
+import { useLiveQuery } from "dexie-react-hooks"
 import {
   SidebarGroup,
   SidebarMenu,
@@ -7,21 +7,21 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from './ui/sidebar'
+} from "./ui/sidebar"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu'
-import { IconArrowUpRight, IconDots, IconFile, IconStarOff, IconTrash } from '@tabler/icons-react'
-import { Link, useParams } from '@tanstack/react-router'
-import { useDocActions } from '@/hooks/use-doc-actions'
+} from "./ui/dropdown-menu"
+import { IconArrowUpRight, IconDots, IconFile, IconStarOff, IconTrash } from "@tabler/icons-react"
+import { Link, useParams } from "@tanstack/react-router"
+import { useDocActions } from "@/hooks/use-doc-actions"
 
 export function NavDocs() {
-  const docs = useLiveQuery(() => db.docs.orderBy('updatedAt').reverse().toArray())
-  const params = useParams({ from: '/$docId', shouldThrow: false })
+  const docs = useLiveQuery(() => db.docs.orderBy("updatedAt").reverse().toArray())
+  const params = useParams({ from: "/$docId", shouldThrow: false })
   const { handleDeleteDoc } = useDocActions()
 
   const { isMobile } = useSidebar()
@@ -40,7 +40,7 @@ export function NavDocs() {
             >
               <span>{item.emoji || <IconFile />}</span>
               {/* <span>{item.id}</span> */}
-              <span>{item.title || 'Без названия'}</span>
+              <span>{item.title || "Без названия"}</span>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger
@@ -53,8 +53,8 @@ export function NavDocs() {
               />
               <DropdownMenuContent
                 className="w-56 rounded-lg"
-                side={isMobile ? 'bottom' : 'right'}
-                align={isMobile ? 'end' : 'start'}
+                side={isMobile ? "bottom" : "right"}
+                align={isMobile ? "end" : "start"}
               >
                 <DropdownMenuItem>
                   <IconStarOff className="text-muted-foreground" />
