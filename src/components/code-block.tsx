@@ -2,10 +2,10 @@ import { NodeViewContent, NodeViewWrapper, type ReactNodeViewProps } from '@tipt
 import { NativeSelect, NativeSelectOption } from './ui/native-select'
 
 export function CodeBlock({
-  extension,
-  updateAttributes,
-  node,
-}: ReactNodeViewProps<HTMLSelectElement>) {
+                            extension,
+                            updateAttributes,
+                            node,
+                          }: ReactNodeViewProps<HTMLSelectElement>) {
   return (
     <NodeViewWrapper className="relative">
       <NativeSelect
