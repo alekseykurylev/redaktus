@@ -1,0 +1,55 @@
+import * as React from 'react'
+import { Editor } from '@/components/editor'
+import { Separator } from '@/components/ui/separator'
+import { SidebarTrigger } from '@/components/ui/sidebar'
+import { createFileRoute, notFound } from '@tanstack/react-router'
+import { db } from '@/lib/db'
+import { DocTitle } from '@/components/doc-title'
+import { DocMenu } from '@/components/doc-menu'
+import { DocBreadcrumb } from '@/components/doc-breadcrumb'
+
+export const Route = createFileRoute('/$docId')({
+  loader: async ({ params }) => {
+    const doc = await db.docs.get(params.docId)
+    const content = await db.contents.get(params.docId)
+
+    if (!doc) throw notFound()
+    return { doc, content }
+  },
+  component: EditorComponent,
+  notFoundComponent: () => {
+    return <p>!!!404 Not found</p>
+  },
+})
+
+function EditorComponent() {
+  const { doc, content } = Route.useLoaderData()
+
+  if (!doc || !content) return null
+
+  return (
+    <React.Fragment key={doc.id}>
+      <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center justify-between gap-2 bg-background px-4">
+        <div className="flex items-center gap-2">
+          <SidebarTrigger className="-ml-1" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <DocBreadcrumb id={doc.id} />
+        </div>
+        <div className="flex shrink-0 items-center gap-2">
+          <div className="text-sm">{new Date(doc.updatedAt).toLocaleString()}</div>
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <DocMenu id={doc.id} />
+        </div>
+      </header>
+      <div className="flex flex-1 flex-col gap-6 px-4 py-10">
+        <div className="mx-auto w-full max-w-3xl">
+          {/* <h1 className="text-4xl font-semibold">Гравитационная машина</h1> */}
+          <DocTitle id={doc.id} title={doc.title} />
+        </div>
+        <div className="mx-auto h-full w-full max-w-3xl">
+          <Editor id={content.id} content={content.data} />
+        </div>
+      </div>
+    </React.Fragment>
+  )
+}
