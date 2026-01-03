@@ -25,7 +25,9 @@ export function Editor({ id, content }: { id: string; content: EditorContentJSON
   const editor = useEditor({
     content,
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        codeBlock: false,
+      }),
       CharacterCount,
       CodeBlockLowlight.extend({
         addNodeView() {
