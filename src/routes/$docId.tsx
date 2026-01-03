@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { createFileRoute, notFound } from "@tanstack/react-router"
 import { db } from "@/lib/db"
-// import { DocTitle } from "@/components/doc-title"
+import { DocTitle } from "@/components/doc-title"
 import { DocMenu } from "@/components/doc-menu"
 
 export const Route = createFileRoute("/$docId")({
@@ -34,7 +34,6 @@ function EditorComponent() {
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <EditorToolbar />
-            {/* <DocBreadcrumb id={doc.id} /> */}
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <div className="text-sm">{new Date(doc.updatedAt).toLocaleString()}</div>
@@ -43,9 +42,9 @@ function EditorComponent() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-6 px-4 py-10">
-          {/* <div className="mx-auto w-full max-w-3xl">
+          <div className="mx-auto w-full max-w-3xl">
             <DocTitle id={doc.id} title={doc.title} />
-          </div> */}
+          </div>
           <div className="mx-auto h-full w-full max-w-3xl">
             <EditorBody />
           </div>

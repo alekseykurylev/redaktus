@@ -2,8 +2,10 @@ import { useRef, useState } from "react"
 import ContentEditable from "react-basic-contenteditable"
 import { useDebouncedCallback } from "use-debounce"
 import { useDocActions } from "@/hooks/use-doc-actions"
+import { useCurrentEditor } from "@tiptap/react"
 
 export function DocTitle({ id, title }: { id: string; title: string }) {
+  const { editor } = useCurrentEditor()
   const { handleSaveTitle } = useDocActions()
   const isFirstRender = useRef(true)
   const [currentContent, setCurrentContent] = useState(title)
@@ -30,6 +32,12 @@ export function DocTitle({ id, title }: { id: string; title: string }) {
       placeholderClassName="text-muted-foreground/50"
       onChange={handleChange}
       autoFocus={!title}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault()
+          editor?.chain().focus()
+        }
+      }}
     />
   )
 }
