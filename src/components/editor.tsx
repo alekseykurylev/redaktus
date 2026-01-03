@@ -101,26 +101,22 @@ function EditorToolbar() {
   return (
     <div className="flex gap-1">
       <Button
-        data-sidebar="trigger"
-        data-slot="sidebar-trigger"
         variant="ghost"
         size="icon-sm"
         onClick={() => editor?.chain().focus().undo().run()}
         disabled={!editorState?.canUndo}
       >
         <IconArrowBackUp />
-        <span className="sr-only">undo</span>
+        <span className="sr-only">Отменить</span>
       </Button>
       <Button
-        data-sidebar="trigger"
-        data-slot="sidebar-trigger"
         variant="ghost"
         size="icon-sm"
         onClick={() => editor?.chain().focus().redo().run()}
         disabled={!editorState?.canRedo}
       >
         <IconArrowForwardUp />
-        <span className="sr-only">redo</span>
+        <span className="sr-only">Вернуть</span>
       </Button>
     </div>
   )

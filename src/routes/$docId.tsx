@@ -6,6 +6,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router"
 import { db } from "@/lib/db"
 import { DocTitle } from "@/components/doc-title"
 import { DocMenu } from "@/components/doc-menu"
+import { formatDocDate } from "@/lib/helpers"
 
 export const Route = createFileRoute("/$docId")({
   loader: async ({ params }) => {
@@ -36,7 +37,7 @@ function EditorComponent() {
             <EditorToolbar />
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <div className="text-sm">{new Date(doc.updatedAt).toLocaleString()}</div>
+            <div className="text-sm">{formatDocDate(doc.updatedAt)}</div>
             <Separator orientation="vertical" className="mr-2 h-4" />
             <DocMenu id={doc.id} />
           </div>
