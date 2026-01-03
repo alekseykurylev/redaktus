@@ -9,7 +9,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from "@/components/ui/sidebar"
 import { NavDocs } from "./nav-docs"
 import { NavMain } from "./nav-main"
@@ -18,7 +17,7 @@ import { NavSecondary } from "./nav-secondary"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar className="border-r-0" {...props}>
+    <Sidebar variant="floating" className="border-r-0" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -36,7 +35,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <NavSecondary />
       </SidebarFooter>
-      <SidebarRail />
     </Sidebar>
   )
 }

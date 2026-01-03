@@ -8,7 +8,13 @@ import { AppSidebar } from "@/components/app-sidebar"
 export const Route = createRootRoute({
   component: () => (
     <>
-      <SidebarProvider>
+      <SidebarProvider
+        style={
+          {
+            "--sidebar-width": "19rem",
+          } as React.CSSProperties
+        }
+      >
         <AppSidebar />
         <SidebarInset>
           <Outlet />
