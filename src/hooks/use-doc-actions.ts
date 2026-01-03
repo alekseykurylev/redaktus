@@ -4,7 +4,11 @@ import { db } from "@/lib/db"
 
 const EMPTY_DOC: EditorContentJSON = {
   type: "doc",
-  content: [],
+  content: [
+    {
+      type: "paragraph",
+    },
+  ],
 }
 
 export function useDocActions() {
@@ -75,6 +79,8 @@ export function useDocActions() {
 
   async function handleSaveContent(id: string, content: EditorContentJSON) {
     const now = new Date()
+    // const title = content.slice(0, 50).replace(/\n/g, " ")
+    // console.log(title)
 
     try {
       await db.transaction("rw", db.contents, db.docs, async () => {
