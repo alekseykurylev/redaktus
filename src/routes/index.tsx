@@ -6,12 +6,14 @@ import {
   ItemHeader,
   ItemTitle,
 } from "@/components/ui/item"
+import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { useDocActions } from "@/hooks/use-doc-actions"
 import { db } from "@/lib/db"
 import { formatSmartDate } from "@/lib/helpers"
 import { IconFile, IconPlus } from "@tabler/icons-react"
 import { createFileRoute, Link } from "@tanstack/react-router"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -23,11 +25,18 @@ export const Route = createFileRoute("/")({
 function App() {
   const docs = Route.useLoaderData()
   const { handleAddDoc } = useDocActions()
+  const isMobile = useIsMobile()
 
   return (
     <>
       <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center gap-2 px-4">
         <SidebarTrigger className="-ml-1" />
+        {isMobile && (
+          <>
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <div>Редактус</div>
+          </>
+        )}
       </header>
       <div className="flex flex-1 flex-col gap-6 px-4 py-10">
         <div className="mx-auto w-full max-w-3xl">
