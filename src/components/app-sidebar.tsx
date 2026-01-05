@@ -9,6 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
 } from "@/components/ui/sidebar"
 import { NavDocs } from "./nav-docs"
 import { NavMain } from "./nav-main"
@@ -35,6 +36,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <NavSecondary />
       </SidebarFooter>
+      <SidebarRail />
     </Sidebar>
   )
 }
