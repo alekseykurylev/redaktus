@@ -23,7 +23,14 @@ export function NavSecondary() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton
+              render={
+                <a
+                  target="_blank"
+                  href="https://max.ru/u/f9LHodD0cOIx_VDfFdQXq-lJui_lzCsnD5DP9ojaeVQuU2sE0OX5g0ZJMvU"
+                />
+              }
+            >
               <IconSend />
               <span>Обратная связь</span>
             </SidebarMenuButton>
