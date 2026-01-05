@@ -9,7 +9,7 @@ import {
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { useDocActions } from "@/hooks/use-doc-actions"
 import { db } from "@/lib/db"
-import { formatDocDate } from "@/lib/helpers"
+import { formatSmartDate } from "@/lib/helpers"
 import { IconFile, IconPlus } from "@tabler/icons-react"
 import { createFileRoute, Link } from "@tanstack/react-router"
 
@@ -33,7 +33,7 @@ function App() {
         <div className="mx-auto w-full max-w-3xl">
           <div className="mb-8 text-3xl">Привет! 👋</div>
           <div className="flex w-full max-w-xl flex-col gap-6">
-            <ItemGroup className="grid grid-cols-3 gap-4">
+            <ItemGroup className="grid grid-cols-2 gap-4 sm:grid-cols-3">
               {docs?.map((item) => (
                 <Item
                   key={item.id}
@@ -43,7 +43,9 @@ function App() {
                   <ItemHeader>{item.emoji || <IconFile />}</ItemHeader>
                   <ItemContent>
                     <ItemTitle className="line-clamp-2">{item.title || "Без названия"}</ItemTitle>
-                    <ItemDescription>{formatDocDate(item.updatedAt)}</ItemDescription>
+                    <ItemDescription className="text-xs">
+                      {formatSmartDate(item.updatedAt)}
+                    </ItemDescription>
                   </ItemContent>
                 </Item>
               ))}
