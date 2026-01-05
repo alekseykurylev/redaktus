@@ -7,6 +7,7 @@ import {
   SidebarMenuItem,
 } from "./ui/sidebar"
 import { useTheme } from "./theme-provider"
+import { InstallButton } from "./install-button"
 
 export function NavSecondary() {
   const { setTheme, theme } = useTheme()
@@ -27,6 +28,7 @@ export function NavSecondary() {
               <span>Обратная связь</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
+          <InstallButton />
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
