@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { IconDots } from "@tabler/icons-react"
+import { DocEmoji } from "@/components/doc-emoji"
 
 export const Route = createFileRoute("/$docId")({
   loader: async ({ params }) => {
@@ -37,7 +38,7 @@ function EditorComponent() {
   return (
     <React.Fragment key={doc.id}>
       <Editor id={content.id} content={content.data}>
-        <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center justify-between gap-2 bg-background px-4">
+        <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center justify-between gap-2 border-b bg-background px-4">
           <div className="flex items-center gap-2">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -61,7 +62,8 @@ function EditorComponent() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-6 px-4 py-10">
-          <div className="mx-auto w-full max-w-3xl">
+          <div className="mx-auto w-full max-w-3xl space-y-3">
+            <DocEmoji id={doc.id} icon={doc.emoji} />
             <DocTitle id={doc.id} title={doc.title} />
           </div>
           <div className="mx-auto h-full w-full max-w-3xl">
