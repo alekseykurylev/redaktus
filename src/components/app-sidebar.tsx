@@ -9,7 +9,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from "@/components/ui/sidebar"
 import { NavDocs } from "./nav-docs"
 import { NavMain } from "./nav-main"
@@ -30,12 +29,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <div className="text-2xl font-bold">Редактус</div>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          {/* <SidebarMenuItem>
-          bg-linear-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent
-            <SidebarMenuButton size="lg" render={<Link to="/" />}>
-              <div className="text-2xl font-bold">Редактус</div>
-            </SidebarMenuButton>
-          </SidebarMenuItem> */}
         </SidebarMenu>
         <NavMain />
       </SidebarHeader>
@@ -46,7 +39,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <NavSecondary />
       </SidebarFooter>
-      <SidebarRail />
+      {/* <SidebarRail /> */}
     </Sidebar>
   )
 }
