@@ -7,6 +7,13 @@ import { db } from "@/lib/db"
 import { DocTitle } from "@/components/doc-title"
 import { DocMenu } from "@/components/doc-menu"
 import { formatSmartDate } from "@/lib/helpers"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+import { IconDots } from "@tabler/icons-react"
 
 export const Route = createFileRoute("/$docId")({
   loader: async ({ params }) => {
@@ -39,7 +46,18 @@ function EditorComponent() {
           <div className="flex shrink-0 items-center gap-2">
             <div className="text-sm">{formatSmartDate(doc.updatedAt)}</div>
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <DocMenu id={doc.id} />
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={
+                  <Button variant="ghost" size="icon-sm">
+                    <IconDots />
+                  </Button>
+                }
+              />
+              <DropdownMenuContent className="w-56 rounded-lg">
+                <DocMenu doc={doc} />
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-6 px-4 py-10">
