@@ -102,7 +102,7 @@ function EmojiPickerContent({
         className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground"
         data-slot="emoji-picker-empty"
       >
-        No emoji found.
+        Не найдено.
       </EmojiPickerPrimitive.Empty>
       <EmojiPickerPrimitive.List
         className="pb-1 select-none"

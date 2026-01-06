@@ -49,7 +49,7 @@ function App() {
                   variant="outline"
                   render={<Link to="/$docId" params={{ docId: item.id }} title={item.title} />}
                 >
-                  <ItemHeader>{item.emoji || <IconFile />}</ItemHeader>
+                  <ItemHeader className="text-3xl">{item.emoji || <IconFile />}</ItemHeader>
                   <ItemContent>
                     <ItemTitle className="line-clamp-2">{item.title || "Без названия"}</ItemTitle>
                     <ItemDescription className="text-xs">

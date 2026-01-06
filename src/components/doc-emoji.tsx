@@ -69,7 +69,7 @@ export function DocEmoji({ id, emoji }: { id: string; emoji?: string }) {
             columns={8}
             onEmojiSelect={({ emoji }) => handleEmoji(emoji)}
           >
-            <EmojiPickerSearch className="border-t" />
+            <EmojiPickerSearch />
             <EmojiPickerContent />
             <EmojiPickerFooter />
           </EmojiPicker>
