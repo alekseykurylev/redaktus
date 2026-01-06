@@ -54,7 +54,7 @@ export function DocEmoji({ id, emoji }: { id: string; emoji?: string }) {
           }
         />
       )}
-      <DialogContent className="sm:max-w-md" showCloseButton={false}>
+      <DialogContent className="max-w-max sm:max-w-max" showCloseButton={false}>
         <DialogHeader className="flex-row items-center justify-between gap-1">
           <button type="button" onClick={handleRemoveEmoji}>
             Удалить
@@ -66,7 +66,6 @@ export function DocEmoji({ id, emoji }: { id: string; emoji?: string }) {
           <EmojiPicker
             locale="ru"
             className="h-[342px]"
-            columns={8}
             onEmojiSelect={({ emoji }) => handleEmoji(emoji)}
           >
             <EmojiPickerSearch />
