@@ -63,7 +63,7 @@ function EditorComponent() {
         </header>
         <div className="flex flex-1 flex-col gap-6 px-4 py-10">
           <div className="mx-auto w-full max-w-3xl space-y-3">
-            <DocEmoji id={doc.id} icon={doc.emoji} />
+            <DocEmoji id={doc.id} emoji={doc.emoji} />
             <DocTitle id={doc.id} title={doc.title} />
           </div>
           <div className="mx-auto h-full w-full max-w-3xl">

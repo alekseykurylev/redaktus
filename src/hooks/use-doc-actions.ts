@@ -77,6 +77,16 @@ export function useDocActions() {
     }
   }
 
+  async function handleSaveEmoji(id: string, emoji: string) {
+    const now = new Date()
+
+    try {
+      await db.docs.update(id, { emoji, updatedAt: now })
+    } catch (error) {
+      console.error("Failed to save emoji", error)
+    }
+  }
+
   async function handleSaveContent(id: string, content: EditorContentJSON) {
     const now = new Date()
 
@@ -94,6 +104,7 @@ export function useDocActions() {
     handleAddDoc,
     handleDeleteDoc,
     handleSaveTitle,
+    handleSaveEmoji,
     handleSaveContent,
   }
 }
