@@ -7,7 +7,8 @@ import {
   useCurrentEditor,
   useEditorState,
 } from "@tiptap/react"
-import { CharacterCount, Placeholder } from "@tiptap/extensions"
+import { FloatingMenu, BubbleMenu } from "@tiptap/react/menus"
+import { CharacterCount } from "@tiptap/extensions"
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
 import { all, createLowlight } from "lowlight"
 import { useDebouncedCallback } from "use-debounce"
@@ -17,7 +18,8 @@ import { useDocActions } from "@/hooks/use-doc-actions"
 import type { EditorContentJSON } from "@/lib/types"
 import { CodeBlock } from "./code-block"
 import { Button } from "./ui/button"
-import { IconArrowBackUp, IconArrowForwardUp } from "@tabler/icons-react"
+import { IconArrowBackUp, IconArrowForwardUp, IconBold } from "@tabler/icons-react"
+import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group"
 
 const lowlight = createLowlight(all)
 
@@ -54,9 +56,9 @@ function Editor({
         lowlight,
         defaultLanguage: "javascript",
       }),
-      Placeholder.configure({
-        placeholder: "Напишите текст",
-      }),
+      // Placeholder.configure({
+      //   placeholder: "Напишите текст",
+      // }),
     ],
     onUpdate: async ({ editor }) => {
       const json = editor.getJSON()
@@ -66,23 +68,63 @@ function Editor({
 
   const providerValue = useMemo(() => ({ editor }), [editor])
 
-  if (!editor) return null
-
   return (
     <EditorContext.Provider value={providerValue}>
       {/* <div>
         Number of renders: <span id="render-count">{countRenderRef.current}</span>
       </div> */}
       {children}
-      {/* <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>
-      <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu> */}
     </EditorContext.Provider>
+  )
+}
+
+function EditorMenu() {
+  const { editor } = useCurrentEditor()
+
+  const editorState = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      if (!editor) return null
+
+      return {
+        isBold: editor.isActive("bold") ?? false,
+        canBold: editor.can().chain().toggleBold().run() ?? false,
+      }
+    },
+  })
+
+  if (!editor) return null
+  return (
+    <>
+      <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>
+      <BubbleMenu editor={editor}>
+        {/* <ToggleGroup type="multiple" variant="outline" spacing={2} size="sm">
+          <ToggleGroupItem value="bold" aria-label="Toggle bold">
+            <IconBold className="h-4 w-4" />
+          </ToggleGroupItem>
+        </ToggleGroup> */}
+        <div>
+          <button
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            disabled={!editorState?.canBold}
+            className={editorState?.isBold ? "is-active" : ""}
+          >
+            Bold
+          </button>
+        </div>
+      </BubbleMenu>
+    </>
   )
 }
 
 function EditorBody() {
   const { editor } = useCurrentEditor()
-  return <EditorContent editor={editor} role="presentation" className="h-full *:min-h-full" />
+  return (
+    <>
+      <EditorContent editor={editor} role="presentation" className="h-full" />
+      <EditorMenu />
+    </>
+  )
 }
 
 function EditorToolbar() {
@@ -90,10 +132,12 @@ function EditorToolbar() {
 
   const editorState = useEditorState({
     editor,
-    selector: (ctx) => {
+    selector: ({ editor }) => {
+      if (!editor) return null
+
       return {
-        canUndo: ctx.editor?.can().chain().undo().run() ?? false,
-        canRedo: ctx.editor?.can().chain().redo().run() ?? false,
+        canUndo: editor.can().chain().undo().run() ?? false,
+        canRedo: editor.can().chain().redo().run() ?? false,
       }
     },
   })

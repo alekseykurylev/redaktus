@@ -2,7 +2,7 @@ import * as React from "react"
 import { Editor, EditorBody, EditorToolbar } from "@/components/editor"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { createFileRoute, notFound } from "@tanstack/react-router"
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router"
 import { db } from "@/lib/db"
 import { DocTitle } from "@/components/doc-title"
 import { DocMenu } from "@/components/doc-menu"
@@ -15,23 +15,26 @@ import {
 import { Button } from "@/components/ui/button"
 import { IconDots } from "@tabler/icons-react"
 import { DocEmoji } from "@/components/doc-emoji"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export const Route = createFileRoute("/$docId")({
   loader: async ({ params }) => {
     const doc = await db.docs.get(params.docId)
     const content = await db.contents.get(params.docId)
 
-    if (!doc) throw notFound()
+    if (!doc) {
+      throw redirect({
+        to: "/",
+      })
+    }
     return { doc, content }
   },
   component: EditorComponent,
-  notFoundComponent: () => {
-    return <p>!!!404 Not found</p>
-  },
 })
 
 function EditorComponent() {
   const { doc, content } = Route.useLoaderData()
+  const isMobile = useIsMobile()
 
   if (!doc || !content) return null
 
@@ -45,8 +48,12 @@ function EditorComponent() {
             <EditorToolbar />
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <div className="text-sm">{formatSmartDate(doc.updatedAt)}</div>
-            <Separator orientation="vertical" className="mr-2 h-4" />
+            {!isMobile && (
+              <>
+                <div className="text-sm">{formatSmartDate(doc.updatedAt)}</div>
+                <Separator orientation="vertical" className="mr-2 h-4" />
+              </>
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger
                 render={
