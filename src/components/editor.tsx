@@ -19,7 +19,7 @@ import type { EditorContentJSON } from "@/lib/types"
 import { CodeBlock } from "./code-block"
 import { Button } from "./ui/button"
 import { IconArrowBackUp, IconArrowForwardUp, IconBold } from "@tabler/icons-react"
-import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group"
+// import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group"
 
 const lowlight = createLowlight(all)
 
@@ -109,7 +109,7 @@ function EditorMenu() {
             disabled={!editorState?.canBold}
             className={editorState?.isBold ? "is-active" : ""}
           >
-            Bold
+            <IconBold className="h-4 w-4" />
           </button>
         </div>
       </BubbleMenu>
