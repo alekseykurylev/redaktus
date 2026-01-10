@@ -12,14 +12,22 @@ import { CharacterCount } from "@tiptap/extensions"
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
 import { all, createLowlight } from "lowlight"
 import { useDebouncedCallback } from "use-debounce"
-// import { FloatingMenu, BubbleMenu } from '@tiptap/react/menus'
 import StarterKit from "@tiptap/starter-kit"
 import { useDocActions } from "@/hooks/use-doc-actions"
 import type { EditorContentJSON } from "@/lib/types"
 import { CodeBlock } from "./code-block"
 import { Button } from "./ui/button"
-import { IconArrowBackUp, IconArrowForwardUp, IconBold } from "@tabler/icons-react"
-// import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group"
+import {
+  IconArrowBackUp,
+  IconArrowForwardUp,
+  IconBold,
+  IconItalic,
+  IconStrikethrough,
+  IconUnderline,
+  IconCode,
+} from "@tabler/icons-react"
+import { Toggle } from "./ui/toggle"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 
 const lowlight = createLowlight(all)
 
@@ -89,28 +97,142 @@ function EditorMenu() {
       return {
         isBold: editor.isActive("bold") ?? false,
         canBold: editor.can().chain().toggleBold().run() ?? false,
+        isItalic: editor.isActive("italic") ?? false,
+        canItalic: editor.can().chain().toggleItalic().run() ?? false,
+        isUnderline: editor.isActive("underline") ?? false,
+        canUnderline: editor.can().chain().toggleUnderline().run() ?? false,
+        isStrike: editor.isActive("strike") ?? false,
+        canStrike: editor.can().chain().toggleStrike().run() ?? false,
+        isCode: editor.isActive("code") ?? false,
+        canCode: editor.can().chain().toggleCode().run() ?? false,
+        canClearMarks: editor.can().chain().unsetAllMarks().run() ?? false,
+        isParagraph: editor.isActive("paragraph") ?? false,
+        isHeading1: editor.isActive("heading", { level: 1 }) ?? false,
+        isHeading2: editor.isActive("heading", { level: 2 }) ?? false,
+        isHeading3: editor.isActive("heading", { level: 3 }) ?? false,
+        isHeading4: editor.isActive("heading", { level: 4 }) ?? false,
+        isHeading5: editor.isActive("heading", { level: 5 }) ?? false,
+        isHeading6: editor.isActive("heading", { level: 6 }) ?? false,
+        isBulletList: editor.isActive("bulletList") ?? false,
+        isOrderedList: editor.isActive("orderedList") ?? false,
+        isCodeBlock: editor.isActive("codeBlock") ?? false,
+        isBlockquote: editor.isActive("blockquote") ?? false,
       }
     },
   })
+
+  const getBlockType = () => {
+    if (editorState?.isHeading1) return "heading1"
+    if (editorState?.isHeading2) return "heading2"
+    if (editorState?.isHeading3) return "heading3"
+    if (editorState?.isBulletList) return "bulletList"
+    if (editorState?.isOrderedList) return "orderedList"
+    if (editorState?.isCodeBlock) return "codeBlock"
+    if (editorState?.isBlockquote) return "blockquote"
+    return "paragraph"
+  }
+
+  const handleBlockTypeChange = (value: string | null) => {
+    if (!editor) return
+
+    switch (value) {
+      case "paragraph":
+        editor.chain().focus().setParagraph().run()
+        break
+      case "heading1":
+        editor.chain().focus().toggleHeading({ level: 1 }).run()
+        break
+      case "heading2":
+        editor.chain().focus().toggleHeading({ level: 2 }).run()
+        break
+      case "heading3":
+        editor.chain().focus().toggleHeading({ level: 3 }).run()
+        break
+      case "bulletList":
+        editor.chain().focus().toggleBulletList().run()
+        break
+      case "orderedList":
+        editor.chain().focus().toggleOrderedList().run()
+        break
+      case "codeBlock":
+        editor.chain().focus().toggleCodeBlock().run()
+        break
+      case "blockquote":
+        editor.chain().focus().toggleBlockquote().run()
+        break
+    }
+  }
 
   if (!editor) return null
   return (
     <>
       <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>
       <BubbleMenu editor={editor}>
-        {/* <ToggleGroup type="multiple" variant="outline" spacing={2} size="sm">
-          <ToggleGroupItem value="bold" aria-label="Toggle bold">
-            <IconBold className="h-4 w-4" />
-          </ToggleGroupItem>
-        </ToggleGroup> */}
-        <div>
-          <button
-            onClick={() => editor.chain().focus().toggleBold().run()}
+        <div className="flex items-center gap-1 rounded-md border border-border bg-popover p-1">
+          <Select value={getBlockType()} onValueChange={handleBlockTypeChange}>
+            <SelectTrigger size="sm" className="border-none bg-transparent!">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="paragraph">Параграф</SelectItem>
+              <SelectItem value="heading1">Заголовок 1</SelectItem>
+              <SelectItem value="heading2">Заголовок 2</SelectItem>
+              <SelectItem value="heading3">Заголовок 3</SelectItem>
+              <SelectItem value="bulletList">Список</SelectItem>
+              <SelectItem value="orderedList">Нумерованный список</SelectItem>
+              <SelectItem value="codeBlock">Блок кода</SelectItem>
+              <SelectItem value="blockquote">Цитата</SelectItem>
+            </SelectContent>
+          </Select>
+          <Toggle
+            size="sm"
+            pressed={editorState?.isBold}
+            onPressedChange={() => editor?.chain().focus().toggleBold().run()}
             disabled={!editorState?.canBold}
-            className={editorState?.isBold ? "is-active" : ""}
+            aria-label="Жирный"
           >
-            <IconBold className="h-4 w-4" />
-          </button>
+            <IconBold />
+          </Toggle>
+
+          <Toggle
+            size="sm"
+            pressed={editorState?.isItalic}
+            onPressedChange={() => editor?.chain().focus().toggleItalic().run()}
+            disabled={!editorState?.canItalic}
+            aria-label="Курсив"
+          >
+            <IconItalic />
+          </Toggle>
+
+          <Toggle
+            size="sm"
+            pressed={editorState?.isStrike}
+            onPressedChange={() => editor?.chain().focus().toggleStrike().run()}
+            disabled={!editorState?.canStrike}
+            aria-label="Зачёркнутый"
+          >
+            <IconStrikethrough />
+          </Toggle>
+
+          <Toggle
+            size="sm"
+            pressed={editorState?.isUnderline}
+            onPressedChange={() => editor?.chain().focus().toggleUnderline().run()}
+            disabled={!editorState?.canUnderline}
+            aria-label="Подчёркнутый"
+          >
+            <IconUnderline />
+          </Toggle>
+
+          <Toggle
+            size="sm"
+            pressed={editorState?.isCode}
+            onPressedChange={() => editor?.chain().focus().toggleCode().run()}
+            disabled={!editorState?.canCode}
+            aria-label="Код"
+          >
+            <IconCode />
+          </Toggle>
         </div>
       </BubbleMenu>
     </>
