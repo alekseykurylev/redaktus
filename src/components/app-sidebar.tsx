@@ -10,11 +10,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { IconLogo } from "@/components/icon-logo"
 import { NavDocs } from "./nav-docs"
 import { NavMain } from "./nav-main"
 import { Link } from "@tanstack/react-router"
 import { NavSecondary } from "./nav-secondary"
-import { IconEdit } from "@tabler/icons-react"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -23,8 +23,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" render={<Link to="/" />}>
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <IconEdit />
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary">
+                <IconLogo className="size-5" />
               </div>
               <div className="text-2xl font-bold">Редактус</div>
             </SidebarMenuButton>
