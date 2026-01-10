@@ -25,6 +25,13 @@ import {
   IconStrikethrough,
   IconUnderline,
   IconCode,
+  IconSourceCode,
+  IconBlockquote,
+  IconListNumbers,
+  IconH1,
+  IconH2,
+  IconH3,
+  IconList,
 } from "@tabler/icons-react"
 import { Toggle } from "./ui/toggle"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
@@ -166,7 +173,66 @@ function EditorMenu() {
   if (!editor) return null
   return (
     <>
-      <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>
+      <FloatingMenu editor={editor}>
+        <div className="flex items-center gap-1 rounded-md bg-popover p-0.5 shadow-md ring-1 ring-foreground/10">
+          <Toggle
+            size="sm"
+            pressed={editorState?.isHeading1}
+            onPressedChange={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()}
+            aria-label="Заголовок 1"
+          >
+            <IconH1 />
+          </Toggle>
+          <Toggle
+            size="sm"
+            pressed={editorState?.isHeading2}
+            onPressedChange={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
+            aria-label="Заголовок 2"
+          >
+            <IconH2 />
+          </Toggle>
+          <Toggle
+            size="sm"
+            pressed={editorState?.isHeading3}
+            onPressedChange={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
+            aria-label="Заголовок 3"
+          >
+            <IconH3 />
+          </Toggle>
+          <Toggle
+            size="sm"
+            pressed={editorState?.isBulletList}
+            onPressedChange={() => editor?.chain().focus().toggleBulletList().run()}
+            aria-label="Маркированный список"
+          >
+            <IconList />
+          </Toggle>
+          <Toggle
+            size="sm"
+            pressed={editorState?.isOrderedList}
+            onPressedChange={() => editor?.chain().focus().toggleOrderedList().run()}
+            aria-label="Нумерованный список"
+          >
+            <IconListNumbers />
+          </Toggle>
+          <Toggle
+            size="sm"
+            pressed={editorState?.isBlockquote}
+            onPressedChange={() => editor?.chain().focus().toggleBlockquote().run()}
+            aria-label="Цитата"
+          >
+            <IconBlockquote />
+          </Toggle>
+          <Toggle
+            size="sm"
+            pressed={editorState?.isCodeBlock}
+            onPressedChange={() => editor?.chain().focus().toggleCodeBlock().run()}
+            aria-label="Блок кода"
+          >
+            <IconSourceCode />
+          </Toggle>
+        </div>
+      </FloatingMenu>
       <BubbleMenu editor={editor}>
         <div className="flex items-center gap-1 rounded-md bg-popover p-0.5 shadow-md ring-1 ring-foreground/10">
           <Select value={getBlockType()} onValueChange={handleBlockTypeChange}>
