@@ -122,14 +122,14 @@ function EditorMenu() {
   })
 
   const getBlockType = () => {
-    if (editorState?.isHeading1) return "heading1"
-    if (editorState?.isHeading2) return "heading2"
-    if (editorState?.isHeading3) return "heading3"
-    if (editorState?.isBulletList) return "bulletList"
-    if (editorState?.isOrderedList) return "orderedList"
-    if (editorState?.isCodeBlock) return "codeBlock"
-    if (editorState?.isBlockquote) return "blockquote"
-    return "paragraph"
+    if (editorState?.isHeading1) return "Заголовок 1"
+    if (editorState?.isHeading2) return "Заголовок 2"
+    if (editorState?.isHeading3) return "Заголовок 3"
+    if (editorState?.isBulletList) return "Маркированный список"
+    if (editorState?.isOrderedList) return "Нумерованный список"
+    if (editorState?.isCodeBlock) return "Блок кода"
+    if (editorState?.isBlockquote) return "Цитата"
+    return "Текст"
   }
 
   const handleBlockTypeChange = (value: string | null) => {
@@ -168,17 +168,17 @@ function EditorMenu() {
     <>
       <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>
       <BubbleMenu editor={editor}>
-        <div className="flex items-center gap-1 rounded-md border border-border bg-popover p-1">
+        <div className="flex items-center gap-1 rounded-md bg-popover p-0.5 shadow-md ring-1 ring-foreground/10">
           <Select value={getBlockType()} onValueChange={handleBlockTypeChange}>
-            <SelectTrigger size="sm" className="border-none bg-transparent!">
+            <SelectTrigger size="sm" className="border-none hover:bg-muted dark:bg-transparent">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="paragraph">Параграф</SelectItem>
+            <SelectContent className="w-min">
+              <SelectItem value="paragraph">Текст</SelectItem>
               <SelectItem value="heading1">Заголовок 1</SelectItem>
               <SelectItem value="heading2">Заголовок 2</SelectItem>
               <SelectItem value="heading3">Заголовок 3</SelectItem>
-              <SelectItem value="bulletList">Список</SelectItem>
+              <SelectItem value="bulletList">Маркированный список</SelectItem>
               <SelectItem value="orderedList">Нумерованный список</SelectItem>
               <SelectItem value="codeBlock">Блок кода</SelectItem>
               <SelectItem value="blockquote">Цитата</SelectItem>
