@@ -27,7 +27,7 @@ export function DocTitle({ id, title }: { id: string; title: string }) {
     <ContentEditable
       updatedContent={title}
       placeholder={!currentContent ? "Без названия" : ""}
-      containerClassName="text-4xl font-semibold"
+      containerClassName="text-4xl font-semibold caret-primary"
       contentEditableClassName="max-w-full w-full p-0! overflow-hidden! focus-visible:outline-0"
       placeholderClassName="text-muted-foreground/50"
       onChange={handleChange}

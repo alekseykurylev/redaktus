@@ -144,19 +144,24 @@
   }
 
   &.ProseMirror {
-    @apply min-h-full font-sans caret-foreground outline-none;
+    @apply min-h-full font-sans caret-primary outline-none;
 
     code {
       @apply rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm;
     }
 
     pre {
-      @apply mt-6 rounded border border-border bg-muted px-5 py-10 font-mono text-sm;
+      @apply mt-6 overflow-x-auto rounded border border-border bg-muted px-4 py-3 font-mono text-sm leading-relaxed;
 
       code {
-        @apply border-r-0 border-none bg-transparent px-0 py-0 text-inherit;
+        @apply border-none bg-transparent px-0 py-0 text-inherit;
       }
     }
+  }
+
+  /* Paragraphs */
+  p {
+    @apply leading-7 text-foreground;
   }
 
   &.ProseMirror p:not(:first-child) {
@@ -168,7 +173,59 @@
     @apply pointer-events-none float-left h-0 text-muted-foreground/50 content-[attr(data-placeholder)];
   }
 
-  /* p.is-empty::before {
-    @apply pointer-events-none float-left h-0 text-muted-foreground/50 content-[attr(data-placeholder)];
-  } */
+  h1 {
+    @apply mt-8 mb-4 text-4xl font-bold tracking-tight text-foreground first:mt-0;
+  }
+
+  h2 {
+    @apply mt-8 mb-4 text-3xl font-semibold tracking-tight text-foreground first:mt-0;
+  }
+
+  h3 {
+    @apply mt-6 mb-3 text-2xl font-semibold tracking-tight text-foreground first:mt-0;
+  }
+
+  /* Lists */
+  ul {
+    @apply mt-6 ml-6 list-disc space-y-2 text-foreground;
+
+    li {
+      @apply pl-1;
+
+      p {
+        @apply mt-0;
+      }
+    }
+
+    /* Nested lists */
+    ul {
+      @apply mt-2 mb-0;
+    }
+  }
+
+  ol {
+    @apply mt-6 ml-6 list-decimal space-y-2 text-foreground;
+
+    li {
+      @apply pl-1;
+
+      p {
+        @apply mt-0;
+      }
+    }
+
+    /* Nested lists */
+    ol {
+      @apply mt-2 mb-0;
+    }
+  }
+
+  /* Blockquotes */
+  blockquote {
+    @apply mt-6 border-l-4 border-primary pl-6 text-muted-foreground italic;
+
+    p {
+      @apply mt-0;
+    }
+  }
 }
